@@ -85,10 +85,6 @@ pip3 install utm
 sudo apt-get install ros-noetic-geodesy
 ```
 
-### Install IGVC World ###
-Custom built world(s) representing the IGVC competition can be found in the [`/worlds`](./worlds) package. To install them for use in the Gazebo simulator, run the `./install_models.sh` script found in the `/worlds/models` folder.
-> **NOTE:** The install script copies specific contents of `/worlds/models` to `~/.gazebo/models`
-
 ### Installing CV dependencies ###
 The cv pipeline has several pip dependencies that need to be installed for both python 2 and  python 3. Run the following commands. 
 ```
@@ -103,6 +99,10 @@ cd espresso-ws
 catkin build
 ```
 After, clone this repository into the `/src` folder.
+
+### Install IGVC World ###
+Custom built world(s) representing the IGVC competition can be found in the [`/worlds`](./worlds) package. To install them for use in the Gazebo simulator, run the `./install_models.sh` script found in the `/worlds/models` folder.
+> **NOTE:** The install script copies specific contents of `/worlds/models` to `~/.gazebo/models`
 
 ## Installing Cartographer (SLAM) ##
 Cartographer provides Mapping and Localization services and requires building from source. Instructions are taken from the [Cartographer ROS](https://google-cartographer-ros.readthedocs.io/en/latest/) documentation.
