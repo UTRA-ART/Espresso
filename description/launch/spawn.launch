@@ -7,7 +7,7 @@
 
     <arg name="x" value="-19.5" if="$(eval arg('world_type') =='pavement')" />
     <arg name="y" value="0" if="$(eval arg('world_type') =='pavement')" />
-    <arg name="z" value="0.241" if="$(eval arg('world_type') =='pavement')" />
+    <arg name="z" value="0.0026" if="$(eval arg('world_type') =='pavement')" />
     <arg name="roll" value="0" if="$(eval arg('world_type') =='pavement')" />
     <arg name="pitch" value="0" if="$(eval arg('world_type') =='pavement')" />
     <arg name="yaw" value="1.5708" if="$(eval arg('world_type') =='pavement')" /> 
@@ -27,4 +27,10 @@
         <param name="rate" value="50"/>
     </node>
     <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+    <!-- Emulate ZED stereo camera image processing -->
+    <include file="$(find description)/launch/zed_emulation.launch">
+        <arg name="camera_ns" value="zed_node"/>
+    </include>
+
 </launch>

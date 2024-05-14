@@ -4,174 +4,144 @@
      For more information, please see http://wiki.ros.org/sw_urdf_exporter -->
 <robot name="espresso" xmlns:xacro="http://ros.org/wiki/xacro">
 
-  <link name="base_link" />
+	<link name="base_link" />
 
-  <gazebo reference="chassis_link">
-    <material>Gazebo/Grey</material>
-  </gazebo>
+	<!-- Includes -->
+	<xacro:include filename="$(find description)/rover_model/urdf/plugins.gazebo.xacro"/>
 
-  <gazebo reference="leftwheel_link">
-    <material>Gazebo/Black</material>
-  </gazebo>
+	<!-- stand_link: origin for anything on the stand; located in the middle, on the top of the stand plate -->
+	<xacro:include filename="$(find description)/rover_model/urdf/stand_link.urdf.xacro"/>
 
-  <gazebo reference="rightwheel_link">
-    <material>Gazebo/Black</material>
-  </gazebo>
+	<!-- wheels: associated to wheels that can be moved by a motor and the caster wheel -->
+    <xacro:include filename="$(find description)/rover_model/urdf/wheels.urdf.xacro"/>
 
-  <gazebo reference="caster_link">
-    <material>Gazebo/Black</material>
-  </gazebo>
+	<link name="chassis_link">
+		<inertial>
+			<origin xyz="-0.040859 0.00033673 -0.054592" rpy="0 0 0" />
+			<mass value="40.135" />
+			<inertia
+				ixx="0.58726"
+				ixy="1.3916E-05"
+				ixz="8.6833E-05"
+				iyy="0.27783"
+				iyz="1.0234E-06"
+				izz="0.67281" />
+		</inertial>
 
-  <link name="chassis_link">
-    <inertial>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-		  <mass value="39.5369810886426" />
-      <inertia
-        ixx="0.585212117734519"
-        ixy="1.57971174375172E-05"
-        ixz="6.29607408717495E-07"
-        iyy="0.277071772262219"
-        iyz="8.37063970658785E-12"
-        izz="0.670549792015464" />
-    </inertial>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://description/rover_model/meshes/chassis_link.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0.79216 0.81961 0.93333 1" />
+			</material>
+		</visual>
 
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh
-          filename="package://description/rover_model/meshes/chassis_link.STL" />
-      </geometry>
-      <material name="chassis">
-        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://description/rover_model/meshes/chassis_link.STL" />
+			</geometry>
+		</collision>
+	</link>
 
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://description/rover_model/meshes/chassis_link.STL" />
-      </geometry>
-    </collision>
-  </link>
+	<joint name="chassis_joint" type="fixed">
+		<origin xyz="-0.004064 0 0.34041" rpy="0 0 0" />
+		<parent link="base_link" />
+		<child link="chassis_link" />
+		<axis xyz="0 0 0" />
+	</joint>
 
-  <joint name="chassis_joint" type="fixed">
-    <origin xyz="0 0 0.34041" rpy="0 0 0" />
-    <parent link="base_link" />
-    <child link="chassis_link" />
-    <axis xyz="0 0 0" />
-  </joint>
+	<gazebo reference="chassis_link">
+		<material>Gazebo/Grey</material>
+	</gazebo>
 
-  <link name="leftwheel_link">
-    <inertial>
-      <origin xyz="5.55111512312578E-17 8.21278600682263E-11 9.54399316521748E-08" rpy="0 0 0" />
-      <mass value="3.53301379822865" />
-      <inertia
-        ixx="0.0305624051588082"
-        ixy="5.44931137897226E-20"
-        ixz="1.89200393429209E-18"
-        iyy="0.0173141878189182"
-        iyz="-3.6016813083668E-11"
-        izz="0.0173141459630085" />
-    </inertial>
+	<!-- Upper LIDAR -->
+	<link name="top_lidar_link">
+		<inertial>
+			<origin xyz="0.012061 -0.00053309 -0.018931" rpy="0 0 0" />
+			<mass value="0.073082" />
+			<inertia
+				ixx="1.9579E-05"
+				ixy="-1.0452E-07"
+				ixz="-4.2823E-07"
+				iyy="2.4126E-05"
+				iyz="9.3469E-09"
+				izz="4.1417E-05" />
+		</inertial>
 
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://description/rover_model/meshes/leftwheel_link.STL" />
-      </geometry>
-      <material name="leftwheel">
-        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://description/rover_model/meshes/lidar_link.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0 0 1 1" />
+			</material>
+		</visual>
 
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://description/rover_model/meshes/leftwheel_link.STL" />
-      </geometry>
-    </collision>
-  </link>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://description/rover_model/meshes/lidar_link.STL" />
+			</geometry>
+		</collision>
+	</link>
 
-  <joint name="leftwheel_joint" type="fixed">
-    <origin xyz="0.304778606533675 0.405179996867082 -0.215405882983008" rpy="0 0 1.5707963267949" />
-    <parent link="chassis_link" />
-    <child link="leftwheel_link" />
-    <axis xyz="0 0 0" />
-  </joint>
+	<joint name="top_lidar_joint" type="fixed">
+		<origin xyz="0.52049 -0.005698 ${distance_to_second_lidar - 0.069334}" rpy="0 0 0" />
+		<!-- before z =  0.0056661 -->
+		<parent link="chassis_link" />
+		<child link="top_lidar_link" />
+		<axis xyz="0 0 0" />
+	</joint>
 
-  <link name="rightwheel_link">
-    <inertial>
-      <origin xyz="5.55111512312578E-17 8.21278600682263E-11 9.54399316521748E-08" rpy="0 0 0" />
-      <mass value="3.53301379822866" />
-      <inertia
-        ixx="0.0305624051588083"
-        ixy="5.28218602084818E-19"
-        ixz="4.30828412271815E-19"
-        iyy="0.0173141878189182"
-        iyz="-3.60168128331012E-11"
-        izz="0.0173141459630085" />
-    </inertial>
+	<gazebo reference="top_lidar_link">
+		<material>Gazebo/Blue</material>
+	</gazebo>
 
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://description/rover_model/meshes/rightwheel_link.STL" />
-      </geometry>
-      <material name="rightwheel">
-        <color rgba="0.792156862745098 0.819607843137255 0.933333333333333 1" />
-      </material>
-    </visual>
+	<!-- Lower LIDAR -->
+	<link name="bottom_lidar_link">
+		<inertial>
+			<origin xyz="-0.044335 2.8732E-05 -0.021084" rpy="0 0 0" />
+			<mass value="0.46918" />
+			<inertia
+				ixx="0.0018061"
+				ixy="-1.363E-06"
+				ixz="7.5472E-05"
+				iyy="0.0004731"
+				iyz="8.5341E-07"
+				izz="0.001728" />
+		</inertial>
 
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://description/rover_model/meshes/rightwheel_link.STL" />
-      </geometry>
-    </collision>
-  </link>
+		<visual>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://description/rover_model/meshes/lidar_link.STL" />
+			</geometry>
+			<material name="">
+				<color rgba="0 0 1 1" />
+			</material>
+		</visual>
 
-  <joint name="rightwheel_joint" type="fixed">
-    <origin xyz="0.304821393466325 -0.405179996867083 -0.215405882983008" rpy="0 0 -1.5707963267949" />
-    <parent link="chassis_link" />
-    <child link="rightwheel_link" />
-    <axis xyz="0 0 0" />
-  </joint>
+		<collision>
+			<origin xyz="0 0 0" rpy="0 0 0" />
+			<geometry>
+				<mesh filename="package://description/rover_model/meshes/lidar_link.STL" />
+			</geometry>
+		</collision>
+	</link>
 
-  <link name="caster_link">
-    <inertial>
-      <origin xyz="-0.0207803938778721 3.28381970077043E-05 -0.114410646083436" rpy="0 0 0" />
-      <mass value="1.04393630391833" />
-      <inertia
-        ixx="0.00251624374833463"
-        ixy="2.49757733670031E-07"
-        ixz="8.7516079967526E-05"
-        iyy="0.00365084050776034"
-        iyz="2.01087649112496E-06"
-        izz="0.00210479541298768" />
-    </inertial>
+	<joint name="bottom_lidar_joint" type="fixed">
+		<origin xyz="0.52049 -0.005698 -0.069334" rpy="0 0 0" />
+		<parent link="chassis_link" />
+		<child link="bottom_lidar_link" />
+		<axis xyz="0 0 0" />
+	</joint>
 
-    <visual>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://description/rover_model/meshes/caster_link.STL" />
-      </geometry>
-      <material name="caster">
-        <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1" />
-      </material>
-    </visual>
+	<gazebo reference="bottom_lidar_link">
+		<material>Gazebo/Blue</material>
+	</gazebo>
 
-    <collision>
-      <origin xyz="0 0 0" rpy="0 0 0" />
-      <geometry>
-        <mesh filename="package://description/rover_model/meshes/caster_link.STL" />
-      </geometry>
-    </collision>
-  </link>
-
-  <joint name="caster_joint" type="fixed">
-    <origin xyz="-0.368330160648919 0.00152400000000027 -0.131826" rpy="0 0 0" />
-    <parent link="chassis_link" />
-    <child link="caster_link" />
-    <axis xyz="0 0 0" />
-  </joint>
 </robot>
