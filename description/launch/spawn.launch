@@ -33,4 +33,10 @@
         <arg name="camera_ns" value="zed_node"/>
     </include>
 
+    <!-- Compute Odometry from Sensor Fusion -->
+    
+    <include file="$(find odom)/launch/odom.launch">
+        <arg name="launch_state" value="sim"/>
+    </include>
+
 </launch>
