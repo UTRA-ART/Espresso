@@ -7,10 +7,11 @@
     <xacro:property name="base_height" value="0.01"/> -->
 
     <!-- Chassis --> 
-    <!-- <xacro:property name="chassis_to_base_link_dist" value="0.501747"/>
-    <xacro:property name="chassis_to_stand_link_dist" value="0.428526"/>
+    <xacro:property name="chassis_to_base_link_dist" value="0.34041"/>
+    <xacro:property name="chassis_to_stand_link_z_dist" value="0.26861"/>
+    <xacro:property name="chassis_to_stand_link_x_dist" value="0.178"/>
 
-    <xacro:property name="chassis_link_mass" value="36.95"/> -->
+    <xacro:property name="chassis_link_mass" value="36.95"/>
 
     <!-- Stand -->
     <!-- <xacro:property name="stand_length" value="0.412"/>
@@ -139,5 +140,9 @@
     <xacro:property name="imu_frame" value="imu_link"/>
     <xacro:property name="imu_topic" value="imu/data"/>
     <xacro:property name="imu_update_rate" value="128.0"/>
+
+    <xacro:property name="imu_x_dist_to_stand" value="-0.018653"/>
+    <xacro:property name="imu_y_dist_to_stand" value="-0.001408"/>
+    <xacro:property name="imu_z_dist_to_stand" value="0.009525"/>
 
 </robot>

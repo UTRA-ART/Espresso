@@ -113,6 +113,7 @@
     </joint>
 
     <!-- IMU -->
+    <!-- Due to the requirements of cartographer, the imu_link frame is located on same height as base_link, but the model is located on top of the stand -->
     <link name="imu_link">
         <inertial>
             <origin xyz="3.0642E-07 -2.658E-07 0.0062442" rpy="0 0 0" />
@@ -127,7 +128,9 @@
         </inertial>
 
         <visual>
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0.61854" rpy="0 0 0" /> <!-- Physical imu located on stand -->
+            <!-- z-pos of visual model moved back up to stand height
+                 z: imu_z_dist_to_stand + chassis_to_stand_link_z_dist + chassis_to_base_link_dist} -->
             <geometry>
                 <mesh filename="package://description/rover_model/meshes/imu_link.STL" />
             </geometry>
@@ -137,7 +140,7 @@
         </visual>
 
         <collision>
-            <origin xyz="0 0 0" rpy="0 0 0" />
+            <origin xyz="0 0 0.61854" rpy="0 0 0" />
             <geometry>
                 <mesh filename="package://description/rover_model/meshes/imu_link.STL" />
             </geometry>
@@ -145,8 +148,10 @@
     </link>
 
     <joint name="imu_joint" type="fixed">
-        <origin xyz="-0.018653 -0.001408 0.009525" rpy="0 0 0" />
-        <parent link="stand_link" />
+        <origin xyz="0.159347 0 0" rpy="0 0 0" />
+        <!-- The x-pos is same as it's actual position on the stand, but z-pos same as base_link
+             x: imu_x_dist_to_stand + chassis_to_stand_link_x_dist -->
+        <parent link="base_link" /> <!-- The frame origin is centered on base_link -->
         <child link="imu_link" />
         <axis xyz="0 0 0" />
     </joint>
