@@ -69,7 +69,7 @@
 
     <xacro:property name="laser_horizontal_resolution" value="1"/>
     <xacro:property name="laser_horizontal_samples" value="1080"/>
-    <xacro:property name="laser_field_of_view" value="270"/>
+    <xacro:property name="laser_field_of_view" value="180"/>
     <xacro:property name="laser_horizontal_min_angle" value="${-0.5*laser_field_of_view*pi/180}"/>
     <xacro:property name="laser_horizontal_max_angle" value="${0.5*laser_field_of_view*pi/180}"/>
 
