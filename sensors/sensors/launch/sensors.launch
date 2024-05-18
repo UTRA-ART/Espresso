@@ -1,0 +1,15 @@
+<launch>
+    <arg name="launch_state" default="sim"/>
+
+    <!-- Launch IMU -->
+    <include file="$(find phidgets_imu)/launch/imu.launch"/>
+
+    <!-- Launch GPS -->
+    <include file="$(find nmea_navsat_driver)/launch/nmea_serial_driver.launch">
+        <arg name="launch_state" value="$(arg launch_state)"/>
+    </include>
+
+    <!-- Launch lower and upper RPLidars -->
+    <include file="$(find sensors)/launch/rplidar_dual.launch"/>
+
+</launch>
