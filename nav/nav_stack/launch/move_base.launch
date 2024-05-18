@@ -1,0 +1,25 @@
+<launch>
+
+    <arg name="launch_state" default="sim"/>
+
+    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
+        <remap from="nav_vel" to="cmd_vel"/>
+
+        <!-- Load common parameters for both the global and local costmaps -->
+        <rosparam file="$(find nav_stack)/config/costmap_common_params.yaml" command="load" ns="global_costmap" />
+        <rosparam file="$(find nav_stack)/config/costmap_common_params.yaml" command="load" ns="local_costmap" />
+
+        <!-- Load costmap (global/local) specific parameters -->
+        <rosparam file="$(find nav_stack)/config/local_costmap_params.yaml" command="load" />
+        <rosparam file="$(find nav_stack)/config/global_costmap_params.yaml" command="load" />
+
+        <!-- Load navigation parameters -->
+        <rosparam file="$(find nav_stack)/config/base_local_planner_params.yaml" command="load" />
+
+        <!-- Global Planner -->
+        <param name="base_global_planner" value="navfn/NavfnROS"/>
+    </node>
+
+    <!-- TODO: always have a manual override available when doing autonomous navigation -->
+
+</launch>
