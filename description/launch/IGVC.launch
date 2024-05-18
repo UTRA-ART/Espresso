@@ -1,0 +1,4 @@
+<launch>
+    <!-- Launch elements in order using python script -->
+    <node name="scheduler" pkg="description" type="scheduler.py" output="screen"/>
+</launch>
