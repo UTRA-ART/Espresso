@@ -73,7 +73,7 @@
     <!-- Second Upper LIDAR -->
     <gazebo reference="top_lidar_link">
         <!-- make sure your sensor NAMES are unique :'( -->
-        <sensor type="ray" name="rplidar_sensor_1">
+        <sensor type="ray" name="rplidar_sensor_2">
             <pose>0 0 0 0 0 0</pose>
             <visualize>${laser_visualize}</visualize>
             <update_rate>${laser_update_rate}</update_rate>
