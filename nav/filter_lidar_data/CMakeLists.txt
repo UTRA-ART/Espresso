@@ -6,11 +6,16 @@ find_package(catkin REQUIRED COMPONENTS
   nav_msgs
   sensor_msgs
   std_msgs
+  pcl_ros
+  pcl_conversions
   message_filters
-  geodesy)
+  geodesy
+  laser_geometry)
+
+find_package(PCL REQUIRED)
 
 catkin_package(
-    INCLUDE_DIRS 
+    INCLUDE_DIRS
     CATKIN_DEPENDS
     roscpp
     nav_msgs
@@ -19,10 +24,12 @@ catkin_package(
     message_filters
     geodesy)
 
-include_directories(${catkin_INCLUDE_DIRS})
+include_directories(${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS})
+link_directories(${PCL_LIBRARY_DIRS})
+add_definitions(${PCL_DEFINITIONS})
 
 add_executable(dual_lidar_filter_node src/dual_lidar_filter_node.cpp)
-target_link_libraries(dual_lidar_filter_node ${catkin_LIBRARIES})
+target_link_libraries(dual_lidar_filter_node ${PCL_LIBRARIES} ${catkin_LIBRARIES})
 
 install(TARGETS dual_lidar_filter_node
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
