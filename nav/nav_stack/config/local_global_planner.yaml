@@ -68,7 +68,7 @@ TrajectoryPlannerROS:
 
   escape_vel: -2.23 # Recovery
 
-  holonomic_robot: false # Caffeine is not Holonomic
+  holonomic_robot: false # Espresso is not Holonomic
 
   # Goal Tolerance Parameters
   xy_goal_tolerance:  0.75
