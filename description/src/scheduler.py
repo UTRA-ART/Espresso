@@ -12,7 +12,7 @@ from geometry_msgs.msg import PoseStamped
 
 class Scheduler:
     '''
-    Class to enforce startup order of Caffeine ros nodes 
+    Class to enforce startup order of Espresso ros nodes 
     '''
     def __init__(self):
         self.node = rospy.init_node('startup_scheduler')
@@ -191,7 +191,7 @@ class Scheduler:
         rospy.loginfo('Starting motor controls...')
         self.initiate_ssh(self.raspberry_pi3, self.username, self.password)
 
-        _stdin, _stdout, _stderr = self.ssh_client.exec_command('cd ~/caffeine_ws && source devel/setup.bash && roslaunch motor_control teleop_motor_control.launch &> /dev/null &')
+        _stdin, _stdout, _stderr = self.ssh_client.exec_command('cd ~/espresso-ws && source devel/setup.bash && roslaunch motor_control teleop_motor_control.launch &> /dev/null &')
         print(_stdout.read().decode()) #prints the stdout of the command
 
         #os.system('roslaunch description motor_control_pipeline.launch launch_state:=IGVC &> /dev/null &')
@@ -217,7 +217,7 @@ class Scheduler:
         # rospy.loginfo('Initializing odometry...')
         # #self.initiate_ssh(self.raspberry_pi2, self.username, self.password)
 
-        # #_stdin, _stdout, _stderr = self.ssh_client.exec_command('cd ~/caffeine_ws && source devel/setup.bash && roslaunch odom odom.launch launch_state:=IGVC &> /dev/null &')
+        # #_stdin, _stdout, _stderr = self.ssh_client.exec_command('cd ~/espresso-ws && source devel/setup.bash && roslaunch odom odom.launch launch_state:=IGVC &> /dev/null &')
         # #print(_stdout.read().decode()) #prints out the stdout of the command
 
         # os.system('roslaunch odom odom.launch launch_state:=IGVC &> /dev/null &')
@@ -258,7 +258,7 @@ class Scheduler:
 if __name__=='__main__':
     scheduler = Scheduler()
     if scheduler.run():
-        rospy.loginfo("Scheduler succeeded. Caffeine is ready to rumble!")
+        rospy.loginfo("Scheduler succeeded. Espresso is ready to rumble!")
         scheduler.unsubscribe_all()
         while not rospy.is_shutdown():
             pass

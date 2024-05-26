@@ -1,6 +1,6 @@
 # Motor #
 
-This folder contains packages that concern the Motors for Caffeine.
+This folder contains packages that concern the Motors for Espresso.
 
 ## Relevant Packages & Topics ##
 

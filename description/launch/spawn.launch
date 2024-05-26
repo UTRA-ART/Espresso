@@ -15,7 +15,7 @@
     <!-- Parse URDF with xacro -->
     <param name="robot_description" command="xacro '$(find description)/rover_model/urdf/espresso.urdf.xacro'"/>
 
-    <!-- Spawn Caffeine in Gazebo -->
+    <!-- Spawn Espresso in Gazebo -->
     <node name="spawn_espresso" pkg="gazebo_ros" type="spawn_model"
         args="-param robot_description
             -urdf -model espresso
