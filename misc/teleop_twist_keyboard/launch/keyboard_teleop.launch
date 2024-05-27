@@ -1,6 +1,6 @@
 <launch>
     <!-- Launch keyboard teleop node -->
     <node name= "teleop_twist_keyboard" pkg="teleop_twist_keyboard" type="teleop_twist_keyboard.py" output="screen">
-      <remap from="key_vel" to="cmd_vel"/>
+      <remap from="cmd_vel" to="key_vel"/>
     </node>
 </launch>
