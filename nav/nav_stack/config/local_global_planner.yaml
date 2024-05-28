@@ -9,7 +9,7 @@ GlobalPlanner:
   #use_grid_path: true
   cost_factor: 0.55
   neutral_cost: 66
-  lethal_cost: 200
+  lethal_cost: 253
 
 # Navigation Function (Backup Planner)
 NavfnROS: #http://wiki.ros.org/navfn
