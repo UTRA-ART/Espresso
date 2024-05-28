@@ -1,0 +1,15 @@
+<launch>
+    <!-- Runs the pothole detection server -->
+    
+    <arg name="launch_state" default="sim"/>
+
+    <node
+        name="pothole_detection_model_inference"
+        pkg="pothole_detection"
+        type="pothole_detection_model_inference.py"
+        output="screen"
+    >
+
+        <remap from="image" to="/zed_node/left/image_rect_color"/>
+    </node>
+</launch>
