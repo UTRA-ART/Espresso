@@ -41,5 +41,6 @@ target_link_libraries(scan ${catkin_LIBRARIES})
 install(TARGETS scan
     RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
 
+add_dependencies(scan lane_detection_generate_messages_cpp)
 
 install(DIRECTORY launch DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION})
