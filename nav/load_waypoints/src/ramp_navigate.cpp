@@ -129,6 +129,7 @@ private:
             ROS_INFO("Waiting for the move_base action server to come up");
         }
         ac.sendGoal(goal);
+        ROS_INFO("Sent first goal");
         
         const float goalerror2 = (px - caff.x()) * (px - caff.x()) + (py - caff.y()) * (py - caff.y());
         if (goalerror2 < 0.5) {
@@ -146,7 +147,9 @@ private:
         std_msgs::Bool is_on_ramp;
         is_on_ramp.data = true;
         ramp_routine_pub.publish(is_on_ramp); // Send message that we are currently crossing ramp
-
+            
+        ROS_INFO("Got to 'cross'");
+        
         const float ramp_traverse_dist = 6; // Total distance to traverse 
         const int traverse_count = 6; // How many goal points to set along the ramp
         const Eigen::Vector2d incr = ramp2map * Eigen::Vector2d(ramp_traverse_dist / traverse_count, 0); // Make it a tiny bit past the ramp
@@ -161,6 +164,8 @@ private:
             py += incr[1];
             goal.target_pose.pose.position.x = px;
             goal.target_pose.pose.position.y = py;
+
+            ROS_INFO("NEW GOALLLL");
 
             ac.sendGoal(goal);
             ac.waitForResult();
