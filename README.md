@@ -169,7 +169,7 @@ After running all 3 commands, set a 2d Nav Goal in RVIZ, and if your robot moves
 ## Other Launch Files
 ```
 # To launch the CV Pipeline
-roslaunch cv pipeline.launch
+roslaunch cv cv_pipeline.launch
 
 # To activate auto-navigation 
 roslaunch load_waypoints load_waypoints.launch 
