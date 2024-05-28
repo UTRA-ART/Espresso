@@ -1,4 +1,8 @@
 <launch>
-    <!-- Launch elements in order using python script -->
-    <node name="scheduler" pkg="description" type="scheduler.py" output="screen"/>
+
+    <arg name="visual_odom" default="false"/>
+
+    <node name="scheduler" pkg="description" type="scheduler.py" output="screen">
+        <param name="visual_odom_enable" value="$(arg visual_odom)"/>
+    </node>
 </launch>
