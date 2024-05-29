@@ -32,7 +32,7 @@ function is_topic_published(topic_name)
 end
 
 -- check if cv published
-local topic_name = "/cv/lane_detections"
+local topic_name = "/cv/lane_detections " -- DON'T REMOVE THE SPACE AFTER. WE NEED IT
 num_scan = 1
 if is_topic_published(topic_name) then
   print("......................cv published")
