@@ -348,7 +348,7 @@ Visualization Manager:
       Shaft Length: 1
       Shaft Radius: 0.05000000074505806
       Shape: Arrow
-      Topic: /move_base_simple/goal
+      Topic: /move_base/current_goal
       Unreliable: false
       Value: true
   Enabled: true
@@ -395,9 +395,9 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.9647961854934692
+      Pitch: 0.5197969079017639
       Target Frame: <Fixed Frame>
-      Yaw: 2.2035717964172363
+      Yaw: 2.5335710048675537
     Saved: ~
 Window Geometry:
   Displays:
