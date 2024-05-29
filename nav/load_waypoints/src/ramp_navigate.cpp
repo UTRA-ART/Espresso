@@ -91,7 +91,7 @@ private:
         // Make the goal closer to ramp until within proximity
         // to mitigate  error caused by calculating the front of ramp to be too far away
         const float goal_dist2 = (midmap[0] - caff.x())*(midmap[0] - caff.x()) + (midmap[1] - caff.y())*(midmap[1] - caff.y());
-        if (goal_dist2 > 2.0*2.0) {
+        if (goal_dist2 > 3.0*3.0) {
             midmap = ramp2map * Eigen::Vector2d(0, 0.5 * len) + Eigen::Vector2d(front.x, front.y);
         }
 
@@ -131,7 +131,7 @@ private:
         ac.sendGoal(goal);
         
         const float goalerror2 = (px - caff.x()) * (px - caff.x()) + (py - caff.y()) * (py - caff.y());
-        if (goalerror2 < 0.75) {
+        if (goalerror2 < 2.0) {
             ROS_INFO("ON RAMP: Initiating ramp crossing");
             state = on_ramp;
             cross(goal, xmid, ymid, ramp2map); // Continue rest of navigation across ramp
@@ -148,8 +148,8 @@ private:
         is_on_ramp.data = true;
         ramp_routine_pub.publish(is_on_ramp); // Send message that we are currently crossing ramp
         
-        const float ramp_traverse_dist = 10; // Total distance to traverse 
-        const int traverse_count = 10; // How many goal points to set along the ramp
+        const float ramp_traverse_dist = 8; // Total distance to traverse 
+        const int traverse_count = 8; // How many goal points to set along the ramp
         const Eigen::Vector2d incr = ramp2map * Eigen::Vector2d(ramp_traverse_dist / traverse_count, 0); // Make it a tiny bit past the ramp
 
         float px = xmid;
