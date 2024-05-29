@@ -35,15 +35,15 @@ DWAPlannerROS:
   max_vel_y: 0
   min_vel_y: 0
 
-  max_rot_vel: 0.75
-  min_rot_vel: -0.75
+  max_rot_vel: 2.0
+  min_rot_vel: -2.0
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 3.14
   xy_goal_tolerance: 0.75
 
   # Forward Simulation Parameters
-  sim_time: 2.0
+  sim_time: 3.0
 
   vx_samples: 15
   vth samples: 40
