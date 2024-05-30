@@ -8,11 +8,20 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   sensor_msgs
   move_base_msgs
+  geometry_msgs
+)
+
+## Generate added messages and services with any dependencies listed here
+add_service_files(
+  FILES
+  RoverNavigation.srv  # Adding the RoverNavigation service definition
 )
 
 ## Generate added messages and services with any dependencies listed here
 generate_messages(
   DEPENDENCIES
+  std_msgs
+  geometry_msgs
   load_waypoints  # Or other packages containing msgs
 )
 
@@ -43,9 +52,11 @@ catkin_package(
     INCLUDE_DIRS
     CATKIN_DEPENDS
     roscpp
+    message_runtime
     nav_msgs
     sensor_msgs
     std_msgs
+    geometry_msgs
     message_filters
     geodesy)
 
