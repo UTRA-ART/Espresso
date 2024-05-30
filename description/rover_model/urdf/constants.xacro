@@ -119,7 +119,7 @@
     <!--ZED CAMERA JOINT PARAMETERS-->
 
     <xacro:property name="ZED_camera_to_top_plate_x" value="${(stand_width / 2.0)-0.01}"/>
-    <xacro:property name="ZED_camera_to_top_plate_z" value="0.065"/>
+    <xacro:property name="ZED_camera_to_top_plate_z" value="0.10098"/>
 
     <!-- Garmin GPS -->
     <!-- NOTE: approx. as a cylinder, Garmin itself is similar to a hockey puck -->
