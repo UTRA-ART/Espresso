@@ -4,7 +4,7 @@
 
   <arg name="launch_state" default="sim"/>
 
-  <arg name="port" default="/dev/ttyUSB0" />  
+  <arg name="port" default="/dev/gps_port_0" />  
   <!-- change port depending on gps is plugged in -->
   <!-- <arg name="baud" default="115200" />   -->
   <!-- <arg name="port" default="/dev/ttyUSB1"/> -->

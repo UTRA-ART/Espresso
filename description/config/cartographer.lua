@@ -25,14 +25,16 @@ function is_topic_published(topic_name)
   handle:close()
 
   if string.find(result, topic_name) == nil then
+    --print(".............not published")
     return false
   else
+    --print(".....hi")
     return true
   end
 end
 
 -- check if cv published
-local topic_name = "/cv/lane_detections " -- DON'T REMOVE THE SPACE AFTER. WE NEED IT
+local topic_name = "/cv/lane_detections\n" -- DON'T REMOVE THE SPACE AFTER. WE NEED IT
 num_scan = 1
 if is_topic_published(topic_name) then
   print("......................cv published")
