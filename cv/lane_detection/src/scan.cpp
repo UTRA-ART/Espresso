@@ -25,7 +25,7 @@ public:
 
 
 
-        listener.waitForTransform("/base_laser", "/left_camera_link_optical", ros::Time(), ros::Duration(4.0)); //Wait for the transform to be uploaded
+        listener.waitForTransform("/bottom_lidar_link", "/left_camera_link_optical", ros::Time(), ros::Duration(4.0)); //Wait for the transform to be uploaded
 
         last_scan_msg_time = ros::Time::now();
         last_scan_found = false;
@@ -65,7 +65,7 @@ private:
     void laneCallback(const lane_detection::FloatArray& float_array) {
         
         sensor_msgs::LaserScan scan_msg;
-        scan_msg.header.frame_id = "base_laser";
+        scan_msg.header.frame_id = "bottom_lidar_link";
         scan_msg.header.stamp = float_array.header.stamp;
         scan_msg.angle_min = -2.3561899662017822;
         scan_msg.angle_max = 2.3561899662017822;
@@ -99,7 +99,7 @@ private:
 
                 geometry_msgs::PoseStamped new_pose;
 
-                listener.transformPose("/base_laser", old_pose, new_pose); //Transform utm coords to "odom" frame
+                listener.transformPose("/bottom_lidar_link", old_pose, new_pose); //Transform utm coords to "odom" frame
 
                 double x = new_pose.pose.position.x;
                 double y = new_pose.pose.position.y;

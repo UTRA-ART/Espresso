@@ -46,11 +46,11 @@ class FloatArrayToPointCloud2Node:
           ]
 
 
-        header = Header(frame_id='base_laser', stamp=rospy.Time.now())
+        header = Header(frame_id='bottom_lidar_link', stamp=rospy.Time.now())
 
         output_msg = point_cloud2.create_cloud(header, fields, points)
 
-        trans = self.tf_buffer.lookup_transform('base_laser', 'left_camera_link_optical', rospy.Time.now(), rospy.Duration(1))
+        trans = self.tf_buffer.lookup_transform('bottom_lidar_link', 'left_camera_link_optical', rospy.Time.now(), rospy.Duration(1))
 
         output_msg = do_transform_cloud(output_msg, trans)
 

@@ -23,7 +23,7 @@ class CameraProjection:
 
 
         rospack = rospkg.RosPack()
-        hard_dir = rospack.get_path('cv') + '/config/depth_sim_good.npy'
+        hard_dir = rospack.get_path('cv') + '/config/depth_sim_30.npy'
         depth_matrix = np.load(hard_dir)
         self.depth_values = np.nan_to_num(cv2.resize(depth_matrix, (330, 180)), nan=10000.)
 

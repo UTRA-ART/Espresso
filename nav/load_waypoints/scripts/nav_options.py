@@ -32,6 +32,14 @@
 #   x: -79.3904467252
 #   y: 43.6570767441"
 
+# Example:
+# rosservice call /rover_navigation "goal_type: ''     
+# goal:
+#  x: 0.0
+#  y: 0.0
+#  z: 0.0" 
+
+
 
 import actionlib
 import rospy
