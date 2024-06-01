@@ -1,7 +1,6 @@
 #!/usr/bin/python3
 import os
 import time
-import paramiko #need to install paramiko Python package
 
 import rospy
 import tf
@@ -44,7 +43,7 @@ class Scheduler:
         self.assign_topic('/odometry/global', 'odom_global_published', Odometry)
         self.assign_topic('/odometry/gps', 'odom_gps_published', Odometry)
         self.assign_topic('/odometry/local', 'odom_local_published', Odometry)
-        self.assign_topic('/fake_odom_wheel_encoder_quat', 'odom_motor_published', Odometry)
+        self.assign_topic('/wheel_odom_euler', 'odom_motor_published', Odometry)
 
         #Cartographer
         self.tracked_pose_set = False
@@ -65,8 +64,6 @@ class Scheduler:
         #SSH
         self.raspberry_pi2 = "10.0.0.2" #IP Address
         self.raspberry_pi3 = "10.0.0.3" #IP Address
-        self.username = "ubuntu"
-        self.password = "utraart2021"
     
     def abort(self, msg):
         rospy.logerr("SOMETHING FAILED. ABORTING. THIS CAUSED IT:" + msg)
@@ -165,20 +162,16 @@ class Scheduler:
 
         # Launch sensors, wait for success
         rospy.loginfo('Starting up sensors...')
-        os.system('roslaunch sensors sensors.launch launch_state:=IGVC frame_id:=gps_link &> /dev/null &')
+        # os.system('roslaunch sensors sensors.launch launch_state:=IGVC frame_id:=gps_link &> /dev/null &') # Lidar has trouble launching, do it separately
+        os.system('roslaunch phidgets_imu imu.launch &> /dev/null &')
+        os.system('roslaunch nmea_navsat_driver nmea_serial_driver.launch &> /dev/null &')
         self.wait_for_condition('imu_started', 35)
         self.wait_for_condition('lower_lidar_started', 35)
         self.wait_for_condition('upper_lidar_started', 40)
         self.wait_for_condition('gps_started', 90)
         rospy.loginfo('Sensors launched.')
 
-        # override scan 
-        rospy.loginfo('Launching scan override...')
-        os.system('roslaunch filter_lidar_data filter_lidar_data.launch &> /dev/null &')
-        self.wait_for_condition('scan_override_set', 20)
-        rospy.loginfo('Scan overriden.')
-
-        #run zed
+        # run zed
         rospy.loginfo('Start ZED separately...')
         if rospy.get_param('/scheduler/visual_odom_enable'):
             os.system('roslaunch zed_wrapper zed_no_tf.launch position_tracking:=true &> /dev/null &')
@@ -190,53 +183,37 @@ class Scheduler:
         # Run cv pipeline, wait for zed 
         rospy.loginfo('Starting CV pipeline...')
         os.system('roslaunch cv cv_pipeline.launch launch_state:=IGVC &> /dev/null &')
-        #self.wait_for_condition('zed_started', 35)
         #self.wait_for_condition('cv_cloud_set', 30)
         self.wait_for_condition('cv_lane_scan_set', 70)
-        self.wait_for_condition('merged_scan_set', 100)
+        # self.wait_for_condition('merged_scan_set', 100)
         rospy.loginfo('CV pipeline launched.')
-        
-        # # Run motor control, teleop and feedback, wait for /odom 
-        # rospy.loginfo('Starting motor controls...')
-        # self.initiate_ssh(self.raspberry_pi3, self.username, self.password)
 
-        # _stdin, _stdout, _stderr = self.ssh_client.exec_command('cd ~/espresso-ws && source devel/setup.bash && roslaunch motor_control teleop_motor_control.launch')
-        # #print(_stdout.read().decode()) #prints the stdout of the command
-
-        # #os.system('roslaunch description motor_control_pipeline.launch launch_state:=IGVC &> /dev/null &')
-        # # self.wait_for_transform(listener, 'base_link', 'odom')
-        # # self.wait_for_condition('odom_motor_published', 30)
-        # rospy.loginfo('Motor controls started.')
-        # #self.close_ssh()
-
-        #Run motor_odom_node
-        rospy.loginfo('Starting motor_odom_node...')
-        os.system('roslaunch motor_odom motor_odom.launch launch_state:=IGVC &> /dev/null &')
+        # Check motor_odom_node (Done on PI, don't launch here)
+        rospy.loginfo('Checking motor_odom_node...')
         self.wait_for_condition('odom_motor_published', 50)
         rospy.loginfo('motor_odom_node launched.')
 
         # Run odom, wait for odom local, global
-        rospy.loginfo('Initializing odometry...')
-        #self.initiate_ssh(self.raspberry_pi2, self.username, self.password)
-
-        #_stdin, _stdout, _stderr = self.ssh_client.exec_command('cd ~/espresso-ws && source devel/setup.bash && roslaunch odom odom.launch launch_state:=IGVC &> /dev/null &')
-        #print(_stdout.read().decode()) #prints out the stdout of the command
-
+        rospy.loginfo('Initializing other odometry...')
         os.system('roslaunch odom odom.launch launch_state:=IGVC &> /dev/null &')
         self.wait_for_condition('odom_global_published', 35)
         self.wait_for_condition('odom_local_published', 35)
+        rospy.loginfo('Odometry (local/global) initialized.')
 
-        rospy.loginfo('Odometry initialized.')
-        #self.close_ssh()
-
-        # Run utm frame transform,wait for odometry/gps
+        # Run utm frame transform, wait for odometry/gps
         rospy.loginfo('Initializing UTM...')
         os.system('roslaunch description utm.launch &> /dev/null &')
         self.wait_for_transform(listener, '/map', '/utm', timeout = 120)
         self.wait_for_condition('odom_gps_published', 45)
         rospy.loginfo('UTM initialized.')
 
-        #Run cartographer
+        # override scan 
+        rospy.loginfo('Launching scan override...')
+        os.system('roslaunch filter_lidar_data filter_lidar_data.launch launch_state:=IGVC &> /dev/null &')
+        self.wait_for_condition('scan_override_set', 20)
+        rospy.loginfo('Scan overriden.')
+
+        # Run cartographer
         rospy.loginfo('Starting cartographer...')
         os.system('roslaunch description cartographer.launch launch_state:=IGVC &> /dev/null &')
         self.wait_for_condition('tracked_pose_set', 60)
@@ -248,20 +225,23 @@ class Scheduler:
         rospy.loginfo('Initializing navigation stack...')
         os.system('roslaunch nav_stack move_base.launch launch_state:=IGVC &> /dev/null &')
         self.wait_for_transform(listener, '/base_link', '/map')
-        #self.wait_for_transform(listener, '/map', '/utm', timeout=120)
         rospy.loginfo('Navstack initialized.')
-        #rospy.loginfo('UTM initialized.')
 
-        ## teleop 
+        ## teleop (Launched on PI, don't launch)
         ## rospy.loginfo('Starting teleop...')
         ## os.system('roslaunch teleop_twist_keyboard keyboard_teleop.launch')
         ## rospy.loginfo('Teleop launched.')
 
-        # # load waypoints 
+        # load waypoints 
         # rospy.loginfo('Loading waypoints...')
         # os.system('roslaunch load_waypoints load_waypoints.launch launch_state:=IGVC &> /dev/null &')
         # rospy.loginfo('Waypoints loaded.') 
 
+        # Rosservice for relative and single gps goals
+        rospy.loginfo('Loading waypoints...')
+        os.system('roslaunch load_waypoints nav_options.launch &> /dev/null &')
+        rospy.loginfo('Nav options loaded.') 
+        
         #rviz
         rospy.loginfo('Starting rviz...')
         os.system('roslaunch description rviz.launch &> /dev/null &')
@@ -275,6 +255,5 @@ if __name__=='__main__':
     if scheduler.run():
         rospy.loginfo("Scheduler succeeded. Espresso is ready to rumble!")
         scheduler.unsubscribe_all()
-        # scheduler.close_ssh()
         while not rospy.is_shutdown():
             pass
