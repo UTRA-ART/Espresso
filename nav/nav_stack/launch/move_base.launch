@@ -18,17 +18,20 @@
         
         <!-- Local Planner (Default) -->
         <!-- Use DWAPlannerROS package for local planning -->
-        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/>
+        <!-- <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> -->
+
+        <!-- Use TEBlocalPlanner package for local planning -->
+        <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS"/> 
 
         <!-- Use TrajectoryPlannerROS package for local planning by commenting out other local planners -->
 
         <!-- Global Planner -->
 
-        <!-- Use Global Planner package for global planning (Default)-->
-        <param name="base_global_planner" value="global_planner/GlobalPlanner"/>
+        <!-- Use NavfnROS package for global planning (Default) (Performance most stable)-->
+        <param name="base_global_planner" value="navfn/NavfnROS"/>      
 
-        <!-- Use NavfnROS package for global planning (Backup) -->
-        <!-- <param name="base_global_planner" value="navfn/NavfnROS"/> -->        
+        <!-- Use Global PLanner package for global planning (still needs tuning/refining) -->  
+        <!-- <param name="base_global_planner" value="global_planner/GlobalPlanner"/> -->
     </node>
 
     <!-- TODO: always have a manual override available when doing autonomous navigation -->

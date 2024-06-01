@@ -7,8 +7,8 @@ local_costmap:
   rolling_window: true
   always_send_full_costmap: false
   # TODO: Update size if needed
-  width: 15 # cost map size needs to be large enough to encompass the point cloud range
-  height: 15 # This size is arbitary for now so it may need to be adjusted
+  width: 10 # cost map size needs to be large enough to encompass the point cloud range
+  height: 10 # This size is arbitary for now so it may need to be adjusted
   #resolution: 0.02
 
   obstacle_layer:
@@ -57,7 +57,7 @@ local_costmap:
 
   inflation_layer:
     enabled:              true
-    inflation_radius:     1.0  # Tunable parameter (affect navigation plan)
+    inflation_radius:     0.75  # Tunable parameter (affect navigation plan)
     cost_scaling_factor:    2.0
 
   plugins:
