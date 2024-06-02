@@ -10,6 +10,7 @@ import numpy as np
 import onnx
 import onnxruntime as ort 
 import torch
+import pandas as pd
 
 from cv_bridge import CvBridge
 from sensor_msgs.msg import Image
@@ -93,9 +94,6 @@ class CVModelInferencer:
                                 [int(width/2)-new_width,length]])
         M2 = cv2.getPerspectiveTransform(input_pts,output_pts)
         out = cv2.warpPerspective(img,M2,(width, length),flags=cv2.INTER_LINEAR)
-        # plt.imshow(out)
-        # cv2.imshow('test', out)
-        # cv2.waitKey(0)
         return out
 
 
@@ -104,15 +102,13 @@ class CVModelInferencer:
             return
             
         raw = self.bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
+        projected_lanes = np.load('/home/tsyh/Documents/num.npy')
+
         
         if raw is not None:
             # Get the image
             input_img = raw.copy()
-            # input_img = self.hack
             
-            # input_img = cv2.resize(raw.shape[1], raw.shape[0])
-            
-            # cv2.imwrite(r'/home/ammarvora/utra/espresso-ws/src/Espresso/cv/lane_detection/src' + 'frame.png', input_img)
             # Do model inference 
             output = None
             mask = None
@@ -122,29 +118,25 @@ class CVModelInferencer:
 
                 mask = np.where(output > 0.5, 1., 0.)
                 mask = mask.astype(np.uint8)
-                mask = cv2.resize(mask, (330, 180))
 
             else:
                 # output = self.Inference.inference(input_img)
                 # input_img = cv2.resize(input_img, (330, 180))
+                input_img = cv2.resize(input_img, (projected_lanes.shape[1], projected_lanes.shape[0]))
                 cv2.rectangle(input_img, (0,0), (input_img.shape[1],int(input_img.shape[0] / 10)), (0,0,0), -1) 
-                # cv2.imwrite(r'/home/tsyh/Downloads/test.jpg', input_img.squeeze())
             
                 output = self.Inference(input_img)
                 confidence_threshold = 0.5
                 # number_masks = sum(1 for box in results[0].boxes if float(box.conf) > confidence_threshold)
                 # print("number masks: ", number_masks)
 
-                labels = {}
-                output_image = np.zeros_like(input_img[:,:,0], dtype=np.uint8)
+                # output_image = np.zeros_like(input_img[:,:,0], dtype=np.uint8)
+                output_image = np.zeros_like(projected_lanes[:,:,0], dtype=np.uint8)
 
                 if output[0].masks:
                     for k in range(len(output[0].masks)):
                         mask = np.array(output[0].masks[k].data.cpu() if torch.cuda.is_available() else output[0].masks[k].data)  # Convert tensor to numpy array
                         label = output[0].names[int(output[0].boxes[k].cls)]
-
-                        if label not in labels:
-                            labels[label] = np.zeros((180,330), dtype=np.uint8)
 
                         if float(output[0].boxes[k].conf) > confidence_threshold:  # Check confidence level
                             if label == 'lane':
@@ -152,13 +144,14 @@ class CVModelInferencer:
                                 img = cv2.resize(img.squeeze(), (output_image.shape[1], output_image.shape[0]))
                                 output_image = np.maximum(output_image, img)
 
-                            resize_mask = np.where(mask > 0.5, 1., 0.).astype(np.uint8)
-                            resize_mask = cv2.resize(resize_mask.squeeze(), (330, 180))
+                            # resize_mask = np.where(mask > 0.5, 1., 0.).astype(np.uint8)
+                            # # resize_mask = cv2.resize(resize_mask.squeeze(), (output_image.shape[1], output_image.shape[0]))
 
-                            labels[label] = np.maximum(labels[label], resize_mask)
+                            # labels[label] = np.maximum(labels[label], cv2.resize(resize_mask.squeeze(), (output_image.shape[1], output_image.shape[0])))
                 output = output_image
-                mask = labels['lane'] if 'lane' in labels else np.zeros((330,180), dtype=np.uint8)
-
+                # mask = labels['lane'] if 'lane' in labels else np.zeros_like(raw, dtype=np.uint8)
+                # mask = labels['lane'].resize((output_image.shape[1], output_image.shape[0])) if 'lane' in labels else np.zeros((1280,720), dtype=np.uint8)
+# 
 
 
             # mask = np.where(output > 0.5, 1., 0.)
@@ -173,15 +166,15 @@ class CVModelInferencer:
                 self.pub_raw.publish(img_msg)
             
 
-            '''The following code is needed for virtual layers'''
-            rows = np.where(mask==1)[0].reshape(-1,1)
-            cols = np.where(mask==1)[1].reshape(-1,1)
-            lane_table = np.concatenate((cols,rows),axis=1)
+            # '''The following code is needed for virtual layers'''
+            # rows = np.where(mask==1)[0].reshape(-1,1)
+            # cols = np.where(mask==1)[1].reshape(-1,1)
+            # lane_table = np.concatenate((cols,rows),axis=1)
 
             # print(lane_table)
 
             # ta = time.time()
-            projected_lanes = self.projection(lane_table)
+            # projected_lanes = self.projection(lane_table)
             # tb = time.time()
 
             # print(f'PROJECTION FPS: {1 / (tb - ta)}')
@@ -189,15 +182,32 @@ class CVModelInferencer:
             # Build the message
             lane_msg = FloatList()
             pts_msg = []
+            # hard_dir = rospack.get_path('cv') + '/config/depth_sim_30.npy'
+            # dir = "/home/tsyh/Documents/point.xyz"
+            # projected_lanes = pd.read_table(dir, skiprows=2, delim_whitespace=True,names=[ 'x', 'y', 'z']).to_numpy()
 
-            for pt in projected_lanes:
+            for i in range(output.shape[0]):
+                for j in range(output.shape[1]):
+                    if((output[i][j])==255):
+                        pt_msg = Point()
+                        pt_msg.x = projected_lanes[i][j][0]
+                        pt_msg.y = projected_lanes[i][j][1]
+                        pt_msg.z = projected_lanes[i][j][2]
 
-                pt_msg = Point()
-                pt_msg.x = pt[0]
-                pt_msg.y = pt[1]
-                pt_msg.z = pt[2]
+                        pts_msg.append(pt_msg)
 
-                pts_msg.append(pt_msg)
+
+
+
+
+            # for pt in projected_lanes:
+
+            #     pt_msg = Point()
+            #     pt_msg.x = pt[0]
+            #     pt_msg.y = pt[1]
+            #     pt_msg.z = pt[2]
+
+            #     pts_msg.append(pt_msg)
             lane_msg.elements = pts_msg
 
 
