@@ -46,6 +46,8 @@ class CVModelInferencer:
         rospack = rospkg.RosPack()
         # self.model_path = rospack.get_path('lane_detection') + '/models/competition_model_4c_128.pt'
         self.model_path = rospack.get_path('lane_detection') + '/models/best.pt'
+        self.depth_map_path = rospack.get_path('lane_detection') + '/cofig/num.npy'
+
 
         # Get the parameter to decide between deep learning and classical
         self.classical_mode = rospy.get_param('/lane_detection_inference/lane_detection_mode')
@@ -102,7 +104,7 @@ class CVModelInferencer:
             return
             
         raw = self.bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
-        projected_lanes = np.load('/home/tsyh/Documents/num.npy')
+        projected_lanes = np.load(self.depth_map_path)
 
         
         if raw is not None:
@@ -121,17 +123,17 @@ class CVModelInferencer:
 
             else:
                 # output = self.Inference.inference(input_img)
-                # input_img = cv2.resize(input_img, (330, 180))
-                input_img = cv2.resize(input_img, (projected_lanes.shape[1], projected_lanes.shape[0]))
-                cv2.rectangle(input_img, (0,0), (input_img.shape[1],int(input_img.shape[0] / 10)), (0,0,0), -1) 
+                input_img = cv2.resize(input_img, (330, 180))
+                # input_img = cv2.resize(input_img, (projected_lanes.shape[1], projected_lanes.shape[0]))
+                # cv2.rectangle(input_img, (0,0), (input_img.shape[1],int(input_img.shape[0] / 9)), (0,0,0), -1) 
             
                 output = self.Inference(input_img)
                 confidence_threshold = 0.5
                 # number_masks = sum(1 for box in results[0].boxes if float(box.conf) > confidence_threshold)
                 # print("number masks: ", number_masks)
 
-                # output_image = np.zeros_like(input_img[:,:,0], dtype=np.uint8)
-                output_image = np.zeros_like(projected_lanes[:,:,0], dtype=np.uint8)
+                output_image = np.zeros_like(input_img[:,:,0], dtype=np.uint8)
+                # output_image = np.zeros_like(projected_lanes[:,:,0], dtype=np.uint8)
 
                 if output[0].masks:
                     for k in range(len(output[0].masks)):
@@ -152,7 +154,6 @@ class CVModelInferencer:
                 # mask = labels['lane'] if 'lane' in labels else np.zeros_like(raw, dtype=np.uint8)
                 # mask = labels['lane'].resize((output_image.shape[1], output_image.shape[0])) if 'lane' in labels else np.zeros((1280,720), dtype=np.uint8)
 # 
-
 
             # mask = np.where(output > 0.5, 1., 0.)
             # mask = mask.astype(np.uint8)
