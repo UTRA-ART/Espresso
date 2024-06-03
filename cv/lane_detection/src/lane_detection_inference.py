@@ -39,7 +39,7 @@ class CVModelInferencer:
         
         self.pub = rospy.Publisher('cv/lane_detections', FloatArray, queue_size=10)
         self.pub_raw = rospy.Publisher('cv/model_output', Image, queue_size=10)
-        self.pub_pt = rospy.Publisher('cv/lane_detections_cloud_scan', PointCloud2, queue_size=10)
+        self.pub_pt = rospy.Publisher('cv/lane_detections_cloud', PointCloud2, queue_size=10)
         # self.pub_scan = rospy.Publisher('cv/lane_detections_scan', LaserScan, queue_size=10)
 
         self.bridge = CvBridge()
