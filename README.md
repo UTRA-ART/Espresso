@@ -22,6 +22,9 @@ sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main
 sudo apt install curl
 curl -s https://raw.githubusercontent.com/ros/rosdistro/master/ros.asc | sudo apt-key add -
 
+# Update your packages
+sudo apt-get update
+
 # Noetic Desktop-Full Install
 sudo apt install ros-noetic-desktop-full
 
@@ -159,7 +162,7 @@ Here are the common commands we run that will verify that your setup is correct 
 roslaunch description simulate.launch use_gui:=true
 
 # Terminal 2: RVIZ (Data Visualization)
-roslaunch description view.launch
+roslaunch description rviz.launch
 
 # Terminal 3: move_base (Navigation Stack)
 roslaunch nav_stack move_base.launch
@@ -174,7 +177,7 @@ roslaunch cv cv_pipeline.launch
 # To activate auto-navigation 
 roslaunch load_waypoints load_waypoints.launch 
 
-# To use teleop to manually control espresso's movement
+# To use teleop to manually control Espresso's movement
 roslaunch teleop_twist_keyboard keyboard_teleop.launch
 ```
 
