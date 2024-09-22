@@ -8,7 +8,6 @@ This project runs on ROS noetic for Ubuntu 20.04 LTS. Espresso is a robot being 
 This is dependent on what OS and computer is currently used. The [wiki](https://github.com/UTRA-ART/Caffeine/wiki) has a section on how to dual boot.
 
 ### Install ROS Noetic ###
-
 The following instructions are taken from the ROS wiki [install noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) page:
 ```
 # Configure Ubuntu repositories
@@ -178,7 +177,7 @@ roslaunch cv cv_pipeline.launch
 # To activate auto-navigation 
 roslaunch load_waypoints load_waypoints.launch 
 
-# To use teleop to manually control espresso's movement
+# To use teleop to manually control Espresso's movement
 roslaunch teleop_twist_keyboard keyboard_teleop.launch
 ```
 
