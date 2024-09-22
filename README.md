@@ -8,6 +8,9 @@ This project runs on ROS noetic for Ubuntu 20.04 LTS. Espresso is a robot being 
 This is dependent on what OS and computer is currently used. The [wiki](https://github.com/UTRA-ART/Caffeine/wiki) has a section on how to dual boot.
 
 ### Install ROS Noetic ###
+#Update yo packages
+sudo apt-get update
+
 The following instructions are taken from the ROS wiki [install noetic](http://wiki.ros.org/noetic/Installation/Ubuntu) page:
 ```
 # Configure Ubuntu repositories
@@ -159,7 +162,7 @@ Here are the common commands we run that will verify that your setup is correct 
 roslaunch description simulate.launch use_gui:=true
 
 # Terminal 2: RVIZ (Data Visualization)
-roslaunch description view.launch
+roslaunch description rviz.launch
 
 # Terminal 3: move_base (Navigation Stack)
 roslaunch nav_stack move_base.launch
