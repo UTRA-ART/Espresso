@@ -340,7 +340,7 @@ if __name__ == "__main__":
         static_waypoint_file = "IGVC_practice.json"
 
     rospy.init_node("navigate_waypoints")
-    waypoints = NavigateWaypoints(static_waypoint_file, max_time_for_transform=120.0)
+    waypoints = NavigateWaypoints(static_waypoint_file, max_time_for_transform=130.0)
 
     # waypoints.navigate_waypoints()
     t = th.Thread(target=waypoints.navigate_waypoints)
