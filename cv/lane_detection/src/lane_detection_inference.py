@@ -70,11 +70,19 @@ class CVModelInferencer:
         # self.hack = cv2.imread(r'/home/ammarvora/utra/espresso-ws/src/Espresso/cv/lane_detection/src/lane.png')
 
         # print(self.hack.shape)
+        
+        # Frame skipping logic to reduce computation load (30 fps vs 5 fps, every 5th frame is processes)
+        self.frame_count = 0
+        self.frame_skip = 5
+
+        # Sets node rate to 5 Hz
+        self.rate = rospy.Rate(5)
 
 
         
     def run(self):
-        rospy.Subscriber("/image", Image, self.process_image)
+        # Ensures only latest frame is processed, mitigates lag
+        rospy.Subscriber("/image", Image, self.process_image, queue_size = 1)
         rospy.spin()
    
     def lane_transform(self, img):
@@ -100,7 +108,12 @@ class CVModelInferencer:
 
 
     def process_image(self, data):
-        if data == []:
+        '''if data == []:
+            return'''
+            
+        # Frame skipping logic
+        self.frame_count += 1
+        if self.frame_count % self.frame_skip != 0:
             return
             
         raw = self.bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
@@ -205,6 +218,9 @@ class CVModelInferencer:
             msg = FloatArray(header=msg_header, lists=[lane_msg])
             msg.header.stamp = data.header.stamp
             self.pub.publish(msg)
+            
+            # Contols publishing rate
+            self.rate.sleep()
 
 if __name__ == '__main__':
     wrapper = CVModelInferencer()
