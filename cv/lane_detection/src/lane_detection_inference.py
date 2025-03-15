@@ -126,7 +126,7 @@ class CVModelInferencer:
 
             else:
                 # output = self.Inference.inference(input_img)
-                # input_img = cv2.resize(input_img, (330, 180))
+                input_img = cv2.resize(input_img, (200, 110))
                 cv2.rectangle(input_img, (0,0), (input_img.shape[1],int(input_img.shape[0] / 10)), (0,0,0), -1) 
                 # cv2.imwrite(r'/home/tsyh/Downloads/test.jpg', input_img.squeeze())
             
@@ -144,7 +144,7 @@ class CVModelInferencer:
                         label = output[0].names[int(output[0].boxes[k].cls)]
 
                         if label not in labels:
-                            labels[label] = np.zeros((180,330), dtype=np.uint8)
+                            labels[label] = np.zeros((110,200), dtype=np.uint8)
 
                         if float(output[0].boxes[k].conf) > confidence_threshold:  # Check confidence level
                             if label == 'lane':
@@ -153,11 +153,11 @@ class CVModelInferencer:
                                 output_image = np.maximum(output_image, img)
 
                             resize_mask = np.where(mask > 0.5, 1., 0.).astype(np.uint8)
-                            resize_mask = cv2.resize(resize_mask.squeeze(), (330, 180))
+                            resize_mask = cv2.resize(resize_mask.squeeze(), (200, 110))
 
                             labels[label] = np.maximum(labels[label], resize_mask)
                 output = output_image
-                mask = labels['lane'] if 'lane' in labels else np.zeros((330,180), dtype=np.uint8)
+                mask = labels['lane'] if 'lane' in labels else np.zeros((200,110), dtype=np.uint8)
 
 
 
@@ -205,9 +205,6 @@ class CVModelInferencer:
             msg = FloatArray(header=msg_header, lists=[lane_msg])
             msg.header.stamp = data.header.stamp
             self.pub.publish(msg)
-
-                
-
 
 if __name__ == '__main__':
     wrapper = CVModelInferencer()
