@@ -77,8 +77,6 @@ class CVModelInferencer:
 
         # Sets node rate to 5 Hz
         self.rate = rospy.Rate(5)
-
-
         
     def run(self):
         # Ensures only latest frame is processed, mitigates lag
@@ -112,11 +110,10 @@ class CVModelInferencer:
             return'''
             
         # Frame skipping logic
-        self.frame_count += 1
-        if self.frame_count % self.frame_skip != 0:
-            return
-        
-        self.frame_count = 0
+        # self.frame_count += 1
+        # if self.frame_count % self.frame_skip != 0:
+        #     return
+        # self.frame_count = 0
             
         raw = self.bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
         
@@ -143,7 +140,7 @@ class CVModelInferencer:
                 # size = (200, 110)
                 size = (330, 180)
                 # output = self.Inference.inference(input_img)
-                input_img = cv2.resize(input_img, size)
+                #input_img = cv2.resize(input_img, size)
                 cv2.rectangle(input_img, (0,0), (input_img.shape[1],int(input_img.shape[0] / 10)), (0,0,0), -1) 
                 # cv2.imwrite(r'/home/tsyh/Downloads/test.jpg', input_img.squeeze())
             
@@ -154,6 +151,7 @@ class CVModelInferencer:
 
                 labels = {}
                 output_image = np.zeros_like(input_img[:,:,0], dtype=np.uint8)
+                # output_image = cv2.resize(output_image, size)
 
                 if output[0].masks:
                     for k in range(len(output[0].masks)):
