@@ -120,6 +120,7 @@ class CVModelInferencer:
         if raw is not None:
             # Get the image
             input_img = raw.copy()
+            input_img = input_img[:, :, :3]
             # input_img = self.hack
             
             # input_img = cv2.resize(raw.shape[1], raw.shape[0])
@@ -138,7 +139,7 @@ class CVModelInferencer:
 
             else:
                 # size = (200, 110)
-                size = (330, 180)
+                # size = (330, 180)
                 # output = self.Inference.inference(input_img)
                 #input_img = cv2.resize(input_img, size)
                 cv2.rectangle(input_img, (0,0), (input_img.shape[1],int(input_img.shape[0] / 10)), (0,0,0), -1) 
