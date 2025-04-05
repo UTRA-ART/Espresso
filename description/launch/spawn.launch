@@ -49,7 +49,11 @@
 
     <!-- Compute Odometry from Sensor Fusion -->
     
-    <include file="$(find odom)/launch/odom.launch">
+    <include file="$(find odom_state)/launch/odom_state.launch">
+        <arg name="launch_state" value="sim"/>
+    </include>
+
+    <include file="$(find imu_denoiser)/launch/imu_denoiser.launch">
         <arg name="launch_state" value="sim"/>
     </include>
 

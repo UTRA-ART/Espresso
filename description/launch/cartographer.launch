@@ -7,7 +7,7 @@
 
     <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="-configuration_directory $(find description)/config -configuration_basename cartographer.lua" output="screen">
 
-        <remap from="imu" to="/imu/data" />
+        <remap from="imu" to="/imu/data_denoised" />
         <remap from="odom" to="/odom" />
         <remap from="scan" to="/scan_modified" />
         <remap from="scan_1" to="/cv/lane_detections_scan"/>
@@ -17,6 +17,5 @@
     </node>
 
     <node name="cartographer_occupancy_grid_node" pkg="cartographer_ros" type="cartographer_occupancy_grid_node" args="-resolution 0.05" />
-
 
 </launch>

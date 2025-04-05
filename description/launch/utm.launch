@@ -2,6 +2,6 @@
     <node pkg="robot_localization" type="navsat_transform_node" name="navsat_transform_node" respawn="true">
         <remap from="odometry/filtered" to="odometry/global"/>
 
-        <rosparam command="load" file="$(find odom)/config/navsat.yaml"/>
+        <rosparam command="load" file="$(find odom_state)/config/navsat.yaml"/>
     </node>
 </launch>
