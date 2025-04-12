@@ -3,7 +3,7 @@
     <arg name="launch_state" default="sim"/>
 
     <node name="imu_denoiser" pkg="imu_denoiser" type="imu_denoiser.py" output="screen">
-        <param name="sampling_frequency" value="100.0"/>
+        <param name="sampling_frequency" value="125.0"/>
         <param name="cutoff_frequency" value="10.0"/>
         <param name="filter_order" value="2"/>
         <remap from="input_topic" to="/imu/data"/>

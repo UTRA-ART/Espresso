@@ -95,7 +95,8 @@ class ImuDenoiser:
         rospy.init_node("imu_denoiser")
 
         # Retrieve parameters (overridable via the parameter server)
-        self.fs = rospy.get_param('~sampling_frequency', 100.0)   # IMU sampling frequency in Hz
+        # Updated default sampling frequency to 125 Hz and cutoff frequency to 10 Hz.
+        self.fs = rospy.get_param('~sampling_frequency', 125.0)   # IMU sampling frequency in Hz
         self.cutoff = rospy.get_param('~cutoff_frequency', 10.0)    # Cutoff frequency in Hz for denoising
         self.order = rospy.get_param('~filter_order', 2)            # Butterworth filter order
         self.input_topic = rospy.get_param('~input_topic', '/imu/data')
