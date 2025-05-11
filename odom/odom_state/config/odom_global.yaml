@@ -40,15 +40,15 @@ odom0_queue_size: 10
 odom0_differential: false
 odom0_relative: false
 
-odom1: odometry/gps
-odom1_config: [true , true , false, # Only uses x, y position
-               false, false, false,
-               false, false, false,
-               false, false, false,
-               false, false, false]
-odom1_queue_size: 10
-odom1_differential: true
-odom1_relative: false
+# odom1: odometry/gps
+# odom1_config: [true , true , false, # Only uses x, y position
+#                false, false, false,
+#                false, false, false,
+#                false, false, false,
+#                false, false, false]
+# odom1_queue_size: 10
+# odom1_differential: true
+# odom1_relative: false
 
 # odom2: zed_node/odom
 # odom2_config: [true, true, false,
