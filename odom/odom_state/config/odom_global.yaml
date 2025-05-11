@@ -29,7 +29,7 @@ print_diagnostics: true
 # odom1_differential: true
 # odom1_relative: false
 
-odom0: wheel_odom/euler # Real wheel_encoder data
+odom0: odom # Sim wheel_encoder data
 # odom0: fake_odom_wheel_encoder_quat # IRL wheel encoder data
 odom0_config: [false , false , false,
                false, false, false,
@@ -40,15 +40,15 @@ odom0_queue_size: 10
 odom0_differential: false
 odom0_relative: false
 
-# odom1: odometry/gps
-# odom1_config: [true , true , false, # Only uses x, y position
-#                false, false, false,
-#                false, false, false,
-#                false, false, false,
-#                false, false, false]
-# odom1_queue_size: 10
-# odom1_differential: true
-# odom1_relative: false
+odom1: odometry/gps
+odom1_config: [true , true , false, # Only uses x, y position
+               false, false, false,
+               false, false, false,
+               false, false, false,
+               false, false, false]
+odom1_queue_size: 10
+odom1_differential: true
+odom1_relative: false
 
 # odom2: zed_node/odom
 # odom2_config: [true, true, false,
@@ -64,19 +64,7 @@ odom0_relative: false
 
 ## IMU Sensor(s) ## 
 
-# imu0: imu/data
-# imu0_config: [false, false, false,
-#               false , false , true ,
-#               false, false, false,
-#               false , false , false ,
-#               false , false , false]
-# imu0_queue_size: 10
-# imu0_differential: false
-# imu0_relative: true
-# imu0_remove_gravitational_acceleration: true
-
-
-imu0: imu/data
+imu0: imu/data_denoised
 imu0_config: [false, false, false,
               false, false , true ,
               false, false, false,

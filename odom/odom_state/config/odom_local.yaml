@@ -18,7 +18,7 @@ print_diagnostics: true
 
 ## Odometry Sensor(s) ##
 
-odom0: wheel_odom/euler #Use wheel_encoder data (change once new node is up). Simulated by Gazebo
+odom0: odom #Use wheel_encoder data (change once new node is up). Simulated by Gazebo
 odom0_config: [true , true , false,
                false, false, true,
                true , true , false,
@@ -39,19 +39,8 @@ odom0_relative: false
 # odom0_relative: false
 
 ## IMU Sensor(s) ##
-# imu0: imu/data
-# imu0_config: [false, false, false,
-#               false , false , true,
-#               false, false, false,
-#               false , false , false ,
-#               false , false , false]
-# imu0_queue_size: 10
-# imu0_differential: false
-# imu0_relative: true
-# imu0_remove_gravitational_acceleration: true
 
-
-imu0: imu/data
+imu0: imu/data_denoised
 imu0_config: [false, false, false,
               true , true , true ,
               false, false, false,

@@ -80,9 +80,6 @@ class ButterworthIMUDenoiser:
             current_val = getattr(lin, axis)
             filt_val, new_state = self.update_filter(current_val, self.state_lin[axis])
             self.state_lin[axis] = new_state
-
-            if axis == 'x':
-                filt_val += 0.35  # Add offset to x-axis linear acceleration
             f_lin[axis] = filt_val
 
         filtered_msg.angular_velocity = Vector3(**f_ang)
@@ -109,7 +106,7 @@ class ImuDenoiser:
         self.denoiser = ButterworthIMUDenoiser(self.order, self.cutoff, self.fs)
 
         # Set up publisher and subscriber.
-        self.publisher = rospy.Publisher(self.output_topic, Imu, queue_size=10)	
+        self.publisher = rospy.Publisher(self.output_topic, Imu, queue_size=10)
         rospy.Subscriber(self.input_topic, Imu, self.callback)
 
         rospy.loginfo("Butterworth IMU Denoiser node running with order=%d, cutoff=%.2f Hz, fs=%.2f Hz",
