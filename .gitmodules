@@ -4,3 +4,6 @@
 [submodule "cv/zed-ros-wrapper"]
 	path = cv/zed-ros-wrapper
 	url = https://github.com/stereolabs/zed-ros-wrapper.git
+[submodule "sensors/phidgets_drivers"]
+	path = sensors/phidgets_drivers
+	url = https://github.com/ros-drivers/phidgets_drivers.git
