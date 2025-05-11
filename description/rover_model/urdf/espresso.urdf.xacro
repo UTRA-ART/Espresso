@@ -15,6 +15,7 @@
 	<!-- wheels: associated to wheels that can be moved by a motor and the caster wheel -->
     <xacro:include filename="$(find description)/rover_model/urdf/wheels.urdf.xacro"/>
 
+	<!-- defining the middle of the main frame of the rover -->
 	<link name="chassis_link">
 		<inertial>
 			<origin xyz="-0.040859 0.00033673 -0.054592" rpy="0 0 0" />
@@ -45,6 +46,7 @@
 			</geometry>
 		</collision>
 	</link>
+
 
 	<joint name="chassis_joint" type="fixed">
 		<origin xyz="0 0 0.34041" rpy="0 0 0" />
