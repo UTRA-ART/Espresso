@@ -4,19 +4,16 @@
 # Name: launch_rover.sh
 # Purpose: Open each ROS command in its own GNOME Terminal window,
 #          source your workspace, and apply custom delays.
-# Usage:   From anywhere: ./launch_rover.sh
+# Usage:   From anywhere: ./src/Espresso/launch_rover.sh
 # ——————————————————————————————————————————————
 
-# 1) Compute workspace root (two levels up from SCRIPT_DIR)
-WORKSPACE_ROOT="$( dirname "$( dirname "$SCRIPT_DIR" )" )"
 
-
-# 2) Define each entry as "command|delay_in_seconds"
+# 1) Define each entry as "command|delay_in_seconds"
 entries=(
   "roslaunch description state_publisher.launch|2"
   "roslaunch nmea_navsat_driver nmea_serial_driver.launch|2"
   "roslaunch phidgets_imu imu.launch|2"
-  "roslaunch imu_denoiser imu_denoiser.launch|2"
+  "roslaunch sensors spatial_imu.lanch|2"
   "roslaunch sensors rplidar_dual.launch|2"
   "roslaunch filter_lidar_data filter_lidar_data.launch|2"
   "roslaunch zed_wrapper zed_no_tf.launch position_tracking:=true|2"
@@ -27,12 +24,12 @@ entries=(
 )
 
 # 3) Loop over each entry, split into cmd & delay, and launch it
+
 for entry in "${entries[@]}"; do
   cmd="${entry%%|*}"
   delay="${entry##*|}"
 
   gnome-terminal -- bash -c "
-  cd \"$WORKSPACE_ROOT\"
   source devel/setup.bash 
   eval \"$cmd\"
   exec bash
