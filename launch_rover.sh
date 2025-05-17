@@ -15,7 +15,7 @@ WORKSPACE_ROOT="$( dirname "$( dirname "$SCRIPT_DIR" )" )"
 entries=(
   "roslaunch description state_publisher.launch|2"
   "roslaunch nmea_navsat_driver nmea_serial_driver.launch|2"
-  "roslaunch phidgets_imu imu.launch|2"
+  "roslaunch sensors spatial_imu.launch|2"
   "roslaunch imu_denoiser imu_denoiser.launch|2"
   "roslaunch sensors rplidar_dual.launch|2"
   "roslaunch filter_lidar_data filter_lidar_data.launch|2"
