@@ -81,7 +81,12 @@ class ButterworthIMUDenoiser:
             filt_val, new_state = self.update_filter(current_val, self.state_lin[axis])
             self.state_lin[axis] = new_state
             if axis == 'x':
-                filt_val+=0.5
+                filt_val+=-0.33 
+                filt_val = -filt_val
+            if axis == 'z':
+                filt_val=0
+            if axis == 'y':
+                filt_val+=-0.39
             if abs(filt_val)<0.1:
                 filt_val = 0
             f_lin[axis] = filt_val

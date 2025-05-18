@@ -7,9 +7,9 @@
 
     <node name="cartographer_node" pkg="cartographer_ros" type="cartographer_node" args="-configuration_directory $(find description)/config -configuration_basename cartographer.lua" output="screen">
 
-        <remap from="imu" to="/imu/data_denoised" />
+        <remap from="imu" to="/imu/data" />
         <!--<remap from="imu" to="/imu_data" />  -->
-        <remap from="odom" to="/zed_node/odom" />
+        <remap from="odom" to="/odometry/local" />
         <remap from="scan" to="/scan_modified" />
         <!-- <remap from="scan_1" to="/cv/lane_detections_scan"/>
         <remap from="scan_2" to="/scan_modified" /> -->

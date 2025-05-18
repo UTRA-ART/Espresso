@@ -25,7 +25,7 @@
     <!-- <param name="frame_id" value="imu_link"/> -->
 
     # optional param use_orientation, default is false
-    <!-- <param name="use_orientation" value="false"/> -->
+    <param name="use_orientation" value="false"/>
 
     # optional param spatial_algorithm, default is "ahrs"
     <!-- <param name="spatial_algorithm" value="ahrs"/> -->
