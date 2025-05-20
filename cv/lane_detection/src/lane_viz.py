@@ -19,7 +19,7 @@ class FloatArrayToPointCloud2Node:
     def __init__(self):
         rospy.init_node("float_array_to_pc2_node")
         self.points2_pub = rospy.Publisher(
-            "/cv/lane_detections_cloud", PointCloud2, queue_size=1
+            "/cv/lane_cloud", PointCloud2, queue_size=1
         )
 
         # listen for transform from camera to lidar frames

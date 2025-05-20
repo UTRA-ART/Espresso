@@ -35,10 +35,10 @@ end
 
 -- check if cv published
 local topic_name = "/cv/lane_detections\n" -- DON'T REMOVE THE SPACE AFTER. WE NEED IT
-num_scan = 1
+num_scan = 0
 if is_topic_published(topic_name) then
   print("......................cv published")
-    num_scan = 2
+    num_scan = 1
 end
 
 print("NUMBER SCAN: ", num_scan)
@@ -47,7 +47,7 @@ options = {
   map_builder = MAP_BUILDER,
   trajectory_builder = TRAJECTORY_BUILDER,
   map_frame = "map",
-  tracking_frame = "imu_link",
+  tracking_frame = "base_link",
   published_frame = "base_link",
   odom_frame = "odom",
   provide_odom_frame = true,
@@ -56,10 +56,10 @@ options = {
   use_odometry = true,
   use_nav_sat = true,
   use_landmarks = false,
-  num_laser_scans = num_scan,
+  num_laser_scans = 1-num_scan,
   num_multi_echo_laser_scans = 0,
   num_subdivisions_per_laser_scan = 1,
-  num_point_clouds = 0,
+  num_point_clouds = num_scan,
   lookup_transform_timeout_sec = 1.,
   submap_publish_period_sec = 0.3,
   pose_publish_period_sec = 5e-3,
@@ -76,8 +76,8 @@ MAP_BUILDER.use_trajectory_builder_2d = true
 TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 10
 
 TRAJECTORY_BUILDER_2D.min_range = 0.1
-TRAJECTORY_BUILDER_2D.missing_data_ray_length = 3.
-TRAJECTORY_BUILDER_2D.use_imu_data = true
+TRAJECTORY_BUILDER_2D.missing_data_ray_length = 15.
+TRAJECTORY_BUILDER_2D.use_imu_data = false
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 10
 TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 15
 
@@ -97,7 +97,7 @@ POSE_GRAPH.global_constraint_search_after_n_seconds = 30 -- Increase
 
 ---------Global/Local SLAM---------
 TRAJECTORY_BUILDER_2D.submaps.num_range_data = 100 -- Decrease
-TRAJECTORY_BUILDER_2D.max_range = 3.5 -- Decrease
+TRAJECTORY_BUILDER_2D.max_range = 10 -- Decrease
 
 -------------------------------------------------------------------------------------
 
