@@ -35,7 +35,7 @@
     <xacro:property name="wheel_left_joint" value="left_wheel_joint"/>
     <xacro:property name="wheel_right_joint" value="right_wheel_joint"/>
 
-    <xacro:property name="wheels_separation" value="0.823976"/>
+    <xacro:property name="wheels_separation" value="0.591832"/>
     <xacro:property name="wheel_diameter" value="0.25"/>
 
     <xacro:property name="wheel_acceleration" value="1.0"/>
