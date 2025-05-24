@@ -9,15 +9,15 @@
   
     <link name="stand_link">
         <inertial>
-            <origin xyz="0.000229157903262472 0.0038685225549956 0.00576901453025613" rpy="0 0 0" />
-            <mass value="0.230738007647473" />
+            <origin xyz="-0.003866 0.005769 0.000194" rpy="0 0 0" />
+            <mass value="0.327857" />
             <inertia
-                ixx="0.0007751891369661"
-                ixy="1.42155279926012E-07"
-                ixz="-1.93289911661184E-06"
-                iyy="0.000429374438189671"
-                iyz="1.9215645736234E-08"
-                izz="0.00119774793119647" />
+                ixx="0.000640"
+                ixy="-0.000013"
+                ixz="0.000055"
+                iyy="0.001837"
+                iyz=" -0.000004"
+                izz="0.001209" />
         </inertial>
 
         <visual>
@@ -39,7 +39,7 @@
     </link>
 
     <joint name="stand_joint" type="fixed">
-        <origin xyz="0.178 0.001524 0.26861" rpy="0 0 0" />
+        <origin xyz="0.3177 0.0 0.354330" rpy="0 0 0" />
         <parent link="chassis_link" />
         <child link="stand_link" />
         <axis xyz="0 0 0" />
@@ -83,7 +83,7 @@
     </link>
 
     <joint name="zed_joint" type="fixed">
-        <origin xyz="0.044163 0 ${ZED_camera_to_top_plate_z}" rpy="0 ${ZED_camera_pitch} 0" />
+        <origin xyz="0.0462 0 ${ZED_camera_to_top_plate_z}" rpy="0 ${ZED_camera_pitch} 0" />
         <parent link="stand_link" />
         <child link="zed_link" />
         <axis xyz="0 0 0" />
@@ -148,9 +148,10 @@
     </link>
 
     <joint name="imu_joint" type="fixed">
-        <origin xyz="0.159347 0 0" rpy="0 0 0" />
+        <origin xyz="0.275329 0 0.798932" rpy="0 0 0" />
         <!-- The x-pos is same as it's actual position on the stand, but z-pos same as base_link
              x: imu_x_dist_to_stand + chassis_to_stand_link_x_dist -->
+        <!-- delta x = 0.370205 ub reality -->
         <parent link="base_link" /> <!-- The frame origin is centered on base_link -->
         <child link="imu_link" />
         <axis xyz="0 0 0" />
@@ -193,7 +194,7 @@
     </link>
 
     <joint name="gps_joint" type="fixed">
-        <origin xyz="-0.054799 0 0.0095015" rpy="0 0 0" />
+        <origin xyz="-0.0502 0.062701 0.0095015" rpy="0 0 0" />
         <parent link="stand_link" />
         <child link="gps_link" />
         <axis xyz="0 0 1" />

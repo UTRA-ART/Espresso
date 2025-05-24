@@ -18,16 +18,16 @@
 	<!-- defining the middle of the main frame of the rover -->
 	<link name="chassis_link">
 		<inertial>
-			<origin xyz="-0.040859 0.00033673 -0.054592" rpy="0 0 0" />
-			<mass value="40.135" />
-			<inertia
-				ixx="0.58726"
-				ixy="1.3916E-05"
-				ixz="8.6833E-05"
-				iyy="0.27783"
-				iyz="1.0234E-06"
-				izz="0.67281" />
-		</inertial>
+			<origin xyz="0.099137 -0.018842 -0.136079" rpy="0 0 0" />
+            <mass value="47.386726" />
+            <inertia
+                ixx="1.885415"
+                ixy="-0.509416"
+                ixz="-0.934927"
+                iyy="5.617588"
+                iyz="0.116315"
+                izz="6.279312" />
+        </inertial>
 
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
@@ -49,7 +49,7 @@
 
 
 	<joint name="chassis_joint" type="fixed">
-		<origin xyz="0 0 0.34041" rpy="0 0 0" />
+		<origin xyz="0 0 0.428727" rpy="0 0 0" />
 		<parent link="base_link" />
 		<child link="chassis_link" />
 		<axis xyz="0 0 0" />
@@ -62,7 +62,7 @@
 	<!-- Upper LIDAR -->
 	<link name="top_lidar_link">
 		<inertial>
-			<origin xyz="0.012061 -0.00053309 -0.018931" rpy="0 0 0" />
+			<origin xyz="0.012061 0.0 -0.018931" rpy="0 0 0" />
 			<mass value="0.073082" />
 			<inertia
 				ixx="1.9579E-05"
@@ -76,7 +76,7 @@
 		<visual>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="package://description/rover_model/meshes/lidar_link.STL" />
+				<mesh filename="package://description/rover_model/meshes/upper_lidar_link.STL" />
 			</geometry>
 			<material name="">
 				<color rgba="0 0 1 1" />
@@ -86,14 +86,14 @@
 		<collision>
 			<origin xyz="0 0 0" rpy="0 0 0" />
 			<geometry>
-				<mesh filename="package://description/rover_model/meshes/lidar_link.STL" />
+				<mesh filename="package://description/rover_model/meshes/upper_lidar_link.STL" />
 			</geometry>
 		</collision>
 	</link>
 
 	<joint name="top_lidar_joint" type="fixed">
-		<origin xyz="0.52049 -0.005698 ${distance_to_second_lidar - 0.069334}" rpy="0 0 0" />
-		<!-- before z =  0.0056661 -->
+		<origin xyz="0.664824 0.0 ${distance_to_second_lidar - 0.185382}" rpy="0 0 0" />
+		<!--  -->
 		<parent link="chassis_link" />
 		<child link="top_lidar_link" />
 		<axis xyz="0 0 0" />
@@ -106,7 +106,7 @@
 	<!-- Lower LIDAR -->
 	<link name="bottom_lidar_link">
 		<inertial>
-			<origin xyz="-0.044335 2.8732E-05 -0.021084" rpy="0 0 0" />
+			<origin xyz="-0.044335 0.0 -0.021084" rpy="0 0 0" />
 			<mass value="0.46918" />
 			<inertia
 				ixx="0.0018061"
@@ -136,7 +136,7 @@
 	</link>
 
 	<joint name="bottom_lidar_joint" type="fixed">
-		<origin xyz="0.52049 -0.005698 -0.069334" rpy="0 0 0" />
+		<origin xyz="0.664824 0.0 -0.185382" rpy="0 0 0" />
 		<parent link="chassis_link" />
 		<child link="bottom_lidar_link" />
 		<axis xyz="0 0 0" />
