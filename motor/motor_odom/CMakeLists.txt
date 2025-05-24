@@ -18,5 +18,7 @@ include_directories(
 )
 
 # Create exectuable
-add_executable(cmd_vel_to_odom src/cmd_vel_to_odom.cpp)
-target_link_libraries(cmd_vel_to_odom ${catkin_LIBRARIES})
+#add_executable(cmd_vel_to_odom src/cmd_vel_to_odom.cpp)
+add_executable(wheel_odom_pub src/odom_pub2.cpp)
+target_link_libraries(wheel_odom_pub ${catkin_LIBRARIES})
+#target_link_libraries(cmd_vel_to_odom ${catkin_LIBRARIES})

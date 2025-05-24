@@ -1,0 +1,3 @@
+<launch>
+    <node name='wheel_odom_pub' pkg='motor_odom' type='wheel_odom_pub' output='screen'/>
+</launch>
