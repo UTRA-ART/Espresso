@@ -71,7 +71,9 @@ class ZedWrapperServer:
         # img = self.bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')  
 
         rospack = rospkg.RosPack()
-        hard_dir = rospack.get_path('cv') + '/config/depth_sim3.npy'
+        # hard_dir = rospack.get_path('cv') + '/config/depth_sim_30.npy'
+        # hard_dir = rospack.get_path('cv') + '/config/num_test.npy'
+        hard_dir = rospack.get_path('cv') + '/config/num.npy'
 
         depth_matrix = np.load(hard_dir)
 

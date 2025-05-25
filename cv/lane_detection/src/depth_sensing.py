@@ -52,7 +52,7 @@ def main():
         # Retrieve colored point cloud. Point cloud is aligned on the left image.
         zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA)
 
-    np.save('/home/tsyh/Documents/num',point_cloud.get_data()[:, :, 0:3])
+    np.save('/home/ubuntu/Documents/num',point_cloud.get_data()[:, :, 0:3])
     err = point_cloud.write('/home/tsyh/Documents/point.xyz')
     if(err == sl.ERROR_CODE.SUCCESS):
         print("point cloud saved")

@@ -50,6 +50,7 @@ class CVModelInferencer:
         rospack = rospkg.RosPack()
         self.model_path = rospack.get_path('lane_detection') + '/models/best_model_int8.pt'
         self.depth_map_path = rospack.get_path('lane_detection') + '/config/num.npy'
+        # self.depth_map_path = rospack.get_path('lane_detection') + '/config/num_test.npy'
 
 
         # Get the parameter to decide between deep learning and classical
