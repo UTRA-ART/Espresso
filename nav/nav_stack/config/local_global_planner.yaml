@@ -47,20 +47,20 @@ TebLocalPlannerROS:
 # Plans robot movement
 DWAPlannerROS: 
   # Robot Configuration Parameters
-  acc_lim_x: 3
+  acc_lim_x: 10
   acc_lim_y: 0
-  acc_lim_th: 3
+  acc_lim_touth: 10
 
-  max_vel_trans: 2.23
+  max_vel_trans: 5
   min_vel_trans: -10
-  max_vel_x: 2.23
+  max_vel_x: 5
   min_vel_x: -10
 
   max_vel_y: 0
   min_vel_y: 0
 
-  max_vel_theta: 5.0
-  min_vel_theta: -5.0
+  max_vel_theta: 10.0
+  min_vel_theta: -10.0
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 3.14
@@ -119,4 +119,3 @@ DWAPlannerROS:
 
 
 #### Recovery Behaviors ####
-

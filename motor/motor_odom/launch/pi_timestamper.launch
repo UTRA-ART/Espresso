@@ -1,0 +1,3 @@
+<launch>
+    <node name='pi_timestamper' pkg='motor_odom' type='pi_timestamper.py'/>
+</launch>
