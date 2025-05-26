@@ -120,6 +120,7 @@ class CVModelInferencer:
             # Get the image
             input_img = raw.copy()
             input_img = cv2.resize(input_img, (330, 180))
+            input_img = input_img[:,:,:3]
             
             # Do model inference 
             output = None

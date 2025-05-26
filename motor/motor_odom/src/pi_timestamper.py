@@ -7,6 +7,6 @@ def callback(msg):
     pub.publish(msg)
 
 rospy.init_node('pi_timestamper')
-sub = rospy.Subscriber('/wheel_odom/euler', Odometry, callback)
-pub = rospy.Publisher('/wheel_odom/euler_synced', Odometry, queue_size=10)
+sub = rospy.Subscriber('/wheel_odom/quat', Odometry, callback)
+pub = rospy.Publisher('/wheel_odom/quat_synced', Odometry, queue_size=10)
 rospy.spin()
