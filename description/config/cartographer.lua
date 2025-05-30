@@ -51,7 +51,7 @@ options = {
   published_frame = "base_link",
   odom_frame = "odom",
   provide_odom_frame = true,
-  publish_tracked_pose = true,
+  publish_tracked_pose = true, --sets whether or not cartographer publishes odom frame
   publish_frame_projected_to_2d = false,
   use_odometry = true,
   use_nav_sat = true,
@@ -100,5 +100,8 @@ TRAJECTORY_BUILDER_2D.submaps.num_range_data = 100 -- Decrease
 TRAJECTORY_BUILDER_2D.max_range = 10 -- Decrease
 
 -------------------------------------------------------------------------------------
+
+---------Parallel Threads--------------
+MAP_BUILDER.num_background_threads = 16
 
 return options

@@ -90,6 +90,7 @@
 
     <param name="use_mag" value="true"/>
     <param name="fixed_frame" value="base_link"/>
+    <param name="publish_tf" value="false"/>
   </node>
 
 </launch>

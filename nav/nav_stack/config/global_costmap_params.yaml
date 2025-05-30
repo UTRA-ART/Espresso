@@ -31,7 +31,7 @@ global_costmap:
       raytrace_range: 8,     # max lidar is rated for is 10m
       inf_is_valid: true,
       expected_update_rate: 5
-  }
+    }
 
     cv_laser_scan: {
       min_obstacle_height: -10.0, # In case odometry z-estimate goes too high/low,
@@ -61,8 +61,8 @@ global_costmap:
   # Inflation layer is necessary to put an area of medium cost around the obstacles (cartographer does not do this)
   inflation_layer:
     enabled:              true
-    inflation_radius:     0.75 # Tunable parameter (affect navigation plan)
-    cost_scaling_factor: 2.0
+    inflation_radius:     0.4 # Tunable parameter (affect navigation plan)
+    cost_scaling_factor: 1.5
 
       # plugins:
       # - {name: static_layer,       type: "rtabmap_costmap_plugins::StaticLayer"}

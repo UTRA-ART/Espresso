@@ -57,8 +57,8 @@ local_costmap:
 
   inflation_layer:
     enabled:              true
-    inflation_radius:     0.75  # Tunable parameter (affect navigation plan)
-    cost_scaling_factor:    2.0
+    inflation_radius:     0.4  # Tunable parameter (affect navigation plan)
+    cost_scaling_factor:    1.5
 
   plugins:
     - {name: obstacle_layer,      type: "costmap_2d::ObstacleLayer"}

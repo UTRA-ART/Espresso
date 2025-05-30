@@ -23,13 +23,14 @@ import math
 import numpy as np
 import sys
 import math
+import cv2
 
 def main():
     # Create a Camera object
     zed = sl.Camera()
 
     # Create a InitParameters object and set configuration parameters
-    init_params = sl.InitParameters(depth_mode=sl.DEPTH_MODE.NEURAL,
+    init_params = sl.InitParameters(depth_mode=sl.DEPTH_MODE.NEURAL,    
                                     coordinate_units=sl.UNIT.METER,
                                     coordinate_system=sl.COORDINATE_SYSTEM.IMAGE)
 
@@ -44,20 +45,23 @@ def main():
     
     point_cloud = sl.Mat()
 
-    mirror_ref = sl.Transform()
-    mirror_ref.set_translation(sl.Translation(2.75,4.0,0))
+    res = sl.Resolution()
+    res.width = 330
+    res.height = 180
 
     # A new image is available if grab() returns SUCCESS
     if zed.grab(runtime_parameters) == sl.ERROR_CODE.SUCCESS:
         # Retrieve colored point cloud. Point cloud is aligned on the left image.
-        zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA)
+        zed.retrieve_measure(point_cloud, sl.MEASURE.XYZRGBA,sl.MEM.CPU, res)
 
-    np.save('/home/tsyh/Documents/num',point_cloud.get_data()[:, :, 0:3])
-    err = point_cloud.write('/home/tsyh/Documents/point.xyz')
-    if(err == sl.ERROR_CODE.SUCCESS):
-        print("point cloud saved")
-    else:
-        print("the point cloud has not been saved")
+    np.save('/home/ubuntu/espresso-ws/src/Espresso/cv/lane_detection/config/depth_map',point_cloud.get_data()[:, :, 0:3])
+    print("point cloud saved")
+
+    # err = point_cloud.write('/home/ubuntu/Documents/point.xyz')
+    # if(err == sl.ERROR_CODE.SUCCESS):
+    #     print("point cloud saved")
+    # else:
+    #     print("the point cloud has not been saved")
 
     # Close the camera
     zed.close()
