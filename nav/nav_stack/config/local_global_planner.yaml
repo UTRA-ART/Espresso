@@ -1,4 +1,4 @@
-planner_frequency: 10
+planner_frequency: 2
 
 ##### Global Planner #####
 # Parameters tweaked largely refers to this doc: https://kaiyuzheng.me/documents/navguide.pdf
@@ -53,10 +53,10 @@ DWAPlannerROS:
   acc_lim_th: 10
 
 
-  max_vel_trans: 5
-  min_vel_trans: -10
-  max_vel_x: 5
-  min_vel_x: -10
+  max_vel_trans: 2.23
+  min_vel_trans: -2.23
+  max_vel_x: 2.23
+  min_vel_x: -2.23
 
   max_vel_y: 0
   min_vel_y: 0
@@ -77,9 +77,12 @@ DWAPlannerROS:
   #sim_granularity: 0.02
 
   # Trajectory Scoring Parameters
-  path_distance_bias: 60.0
-  goal_distance_bias: 15.0
+  path_distance_bias: 30.0
+  goal_distance_bias: 25.0
   occdist_scale: 0.05
+
+  scaling_speed: 0.75
+
 
 # Plans robot movement
   

@@ -27,8 +27,8 @@ global_costmap:
       topic: /scan_modified,
       marking: true,
       clearing: true,
-      obstacle_range: 7.7,   # Decide how far we should see obstacles, should be less than raytrace range
-      raytrace_range: 8,     # max lidar is rated for is 10m
+      obstacle_range: 3.7,   # Decide how far we should see obstacles, should be less than raytrace range
+      raytrace_range: 4,     # max lidar is rated for is 10m
       inf_is_valid: true,
       expected_update_rate: 5
     }
