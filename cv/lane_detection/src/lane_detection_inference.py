@@ -49,9 +49,7 @@ class CVModelInferencer:
         
         rospack = rospkg.RosPack()
         self.model_path = rospack.get_path('lane_detection') + '/models/best_model_int8.pt'
-        self.depth_map_path = rospack.get_path('lane_detection') + '/config/num.npy'
-        # self.depth_map_path = rospack.get_path('lane_detection') + '/config/num_test.npy'
-
+        self.depth_map_path = rospack.get_path('lane_detection') + '/config/depth_map.npy'
 
         # Get the parameter to decide between deep learning and classical
         self.classical_mode = rospy.get_param('/lane_detection_inference/lane_detection_mode')
@@ -140,7 +138,6 @@ class CVModelInferencer:
                 confidence_threshold = 0.5
 
                 output_image = np.zeros_like(input_img[:,:,0], dtype=np.uint8)
-                # output_image = np.zeros_like(projected_lanes[:,:,0], dtype=np.uint8)
 
                 if output[0].masks:
                     for k in range(len(output[0].masks)):

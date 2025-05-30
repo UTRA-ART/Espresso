@@ -20,15 +20,15 @@ print_diagnostics: true
 
 ## Odometry Sensor(s) ##
 
-odom0: wheel_odom/quat_synced #Use wheel_encoder data
-odom0_config: [true , true , false,
-               false, false, true,
-               true , true , false,
-               false, false, true ,
-               false, false, false]
-odom0_queue_size: 10
-odom0_differential: false
-odom0_relative: false
+# odom0: wheel_odom/quat_synced #Use wheel_encoder data
+# odom0_config: [true , true , false,
+#                false, false, true,
+#                true , true , false,
+#                false, false, true ,
+#                false, false, false]
+# odom0_queue_size: 10
+# odom0_differential: false
+# odom0_relative: false
 
 # odom1: zed_node/odom
 # odom1_config: [true, true, false,
