@@ -2,7 +2,7 @@ local_costmap:
   global_frame: odom
   robot_base_frame: base_link
   update_frequency: 20.0 # 50
-  publish_frequency: 20.0 # 20
+  publish_frequency: 10.0 # 20
   static_map: false
   rolling_window: true
   always_send_full_costmap: false
@@ -57,7 +57,7 @@ local_costmap:
 
   inflation_layer:
     enabled:              true
-    inflation_radius:     0.4  # Tunable parameter (affect navigation plan)
+    inflation_radius:     0.75  # Tunable parameter (affect navigation plan)
     cost_scaling_factor:    1.5
 
   plugins:
