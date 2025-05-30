@@ -20,7 +20,7 @@ print_diagnostics: true
 
 ## Odometry Sensor(s) ##
 
-odom0: wheel_odom/euler #Use wheel_encoder data
+odom0: wheel_odom/quat_synced #Use wheel_encoder data
 odom0_config: [true , true , false,
                false, false, true,
                true , true , false,
