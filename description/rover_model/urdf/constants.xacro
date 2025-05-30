@@ -7,11 +7,11 @@
     <xacro:property name="base_height" value="0.01"/> -->
 
     <!-- Chassis --> 
-    <xacro:property name="chassis_to_base_link_dist" value="0.34041"/>
-    <xacro:property name="chassis_to_stand_link_z_dist" value="0.26861"/>
-    <xacro:property name="chassis_to_stand_link_x_dist" value="0.178"/>
+    <xacro:property name="chassis_to_base_link_dist" value="0.428727"/>
+    <xacro:property name="chassis_to_stand_link_z_dist" value="0.354330"/>
+    <xacro:property name="chassis_to_stand_link_x_dist" value="0.3177"/>
 
-    <xacro:property name="chassis_link_mass" value="36.95"/>
+    <xacro:property name="chassis_link_mass" value="47.386726"/>
 
     <!-- Stand -->
     <!-- <xacro:property name="stand_length" value="0.412"/>
@@ -35,7 +35,7 @@
     <xacro:property name="wheel_left_joint" value="left_wheel_joint"/>
     <xacro:property name="wheel_right_joint" value="right_wheel_joint"/>
 
-    <xacro:property name="wheels_separation" value="0.823976"/>
+    <xacro:property name="wheels_separation" value="0.591832"/>
     <xacro:property name="wheel_diameter" value="0.25"/>
 
     <xacro:property name="wheel_acceleration" value="1.0"/>
@@ -87,7 +87,7 @@
     <xacro:property name="top_laser_topicName" value="scan_upper"/>
     <xacro:property name="top_laser_frameName" value="top_lidar_link"/>
 
-    <xacro:property name="distance_to_second_lidar" value="0.14"/>
+    <xacro:property name="distance_to_second_lidar" value="0.13079"/>
 
     <!-- ZED camera -->
     <!-- NOTE: approx as a rectangular prism -->
@@ -119,7 +119,7 @@
     <!--ZED CAMERA JOINT PARAMETERS-->
 
     <xacro:property name="ZED_camera_to_top_plate_x" value="${(stand_width / 2.0)-0.01}"/>
-    <xacro:property name="ZED_camera_to_top_plate_z" value="0.10098"/>
+    <xacro:property name="ZED_camera_to_top_plate_z" value="0.085525"/>
 
     <!-- Garmin GPS -->
     <!-- NOTE: approx. as a cylinder, Garmin itself is similar to a hockey puck -->
