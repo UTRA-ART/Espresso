@@ -1,4 +1,4 @@
-planner_frequency: 2
+planner_frequency: 10
 
 ##### Global Planner #####
 # Parameters tweaked largely refers to this doc: https://kaiyuzheng.me/documents/navguide.pdf
@@ -79,7 +79,7 @@ DWAPlannerROS:
   # Trajectory Scoring Parameters
   path_distance_bias: 30.0
   goal_distance_bias: 25.0
-  occdist_scale: 0.05
+  occdist_scale: 0.1
 
   scaling_speed: 0.75
 

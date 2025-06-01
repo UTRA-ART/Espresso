@@ -85,11 +85,11 @@ class ButterworthIMUDenoiser:
             if axis == 'x':
                 filt_val+=0
             if axis == 'z':
-                filt_val=0
+                filt_val+=0
             if axis == 'y':
                 filt_val+=0
-            if abs(filt_val)<0.1:
-                filt_val = 0
+            # if abs(filt_val)<0.1:
+            #     filt_val = 0
             f_lin[axis] = filt_val
 
         filtered_msg.angular_velocity = Vector3(**f_ang)
