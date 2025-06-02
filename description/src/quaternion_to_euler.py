@@ -18,7 +18,7 @@ def odom_callback(msg):
 
 def quaternion_to_euler_node():
     rospy.init_node('quaternion_to_euler_node', anonymous=True)
-    rospy.Subscriber("/zed_node/odom", Odometry, odom_callback)
+    rospy.Subscriber("/wheel_odom/quat", Odometry, odom_callback)
     rospy.spin()
 
 if __name__ == '__main__':
