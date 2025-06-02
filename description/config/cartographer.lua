@@ -33,15 +33,15 @@ function is_topic_published(topic_name)
   end
 end
 
--- -- check if cv published
--- local topic_name = "/cv/lane_detections\n" -- DON'T REMOVE THE SPACE AFTER. WE NEED IT
--- num_scan = 0
--- if is_topic_published(topic_name) then
---   print("......................cv published")
---     num_scan = 1
--- end
+-- check if cv published
+local topic_name = "/cv/lane_detections\n" -- DON'T REMOVE THE SPACE AFTER. WE NEED IT
+num_scan = 0
+if is_topic_published(topic_name) then
+  print("......................cv published")
+    num_scan = 1
+end
 
--- print("NUMBER SCAN: ", num_scan)
+print("NUMBER SCAN: ", num_scan)
 
 options = {
   map_builder = MAP_BUILDER,
@@ -56,7 +56,7 @@ options = {
   use_odometry = true,
   use_nav_sat = true,
   use_landmarks = false,
-  num_laser_scans = 1,
+  num_laser_scans = num_scan,
   num_multi_echo_laser_scans = 0,
   num_subdivisions_per_laser_scan = 1,
   num_point_clouds = 1,
