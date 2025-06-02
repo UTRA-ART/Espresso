@@ -69,7 +69,7 @@ DWAPlannerROS:
   xy_goal_tolerance: 0.75
 
   # Forward Simulation Parameters
-  sim_time: 2.25
+  sim_time: 5
 
   vx_samples: 10
   vth samples: 10
@@ -77,13 +77,13 @@ DWAPlannerROS:
   #sim_granularity: 0.02
 
   # Trajectory Scoring Parameters
-  path_distance_bias: 30.0
+  path_distance_bias: 20.0
   goal_distance_bias: 25.0
   occdist_scale: 0.1
 
-  min_speed_scale: 0.2
+  min_speed_scale: 0.5
   prefer_high_velocities: true
-  forward_point_distance: 0.3
+  forward_point_distance: 0.5
 
 
 # Plans robot movement
