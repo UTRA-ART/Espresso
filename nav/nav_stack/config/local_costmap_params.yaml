@@ -57,7 +57,7 @@ local_costmap:
 
   inflation_layer:
     enabled:              true
-    inflation_radius:     0.4  # Tunable parameter (affect navigation plan)
+    inflation_radius:     0.3  # Tunable parameter (affect navigation plan)
     cost_scaling_factor:    1.5
 
   plugins:
