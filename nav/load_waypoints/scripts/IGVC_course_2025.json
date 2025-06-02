@@ -6,16 +6,16 @@
     "waypoints" : [
         {
             "id" : 0,
-            "longitude" : -83.219361,
-            "latitude" : 42.668121,
+            "longitude" : -83.21934030,
+            "latitude" : 42.66826972,
             "description"  : "North waypoint",
             "frame_id" : "map"
         },
         
         {
-            "id" : 1,
-            "longitude" : -83.219328,
-            "latitude" : 42.667928,
+            "id" : 3,
+            "longitude" : -83.21932764,
+            "latitude" : 42.66792771,
             "description"  : "South waypoint",
             "frame_id" : "map"
         }
