@@ -282,6 +282,7 @@ class NavigateWaypoints:
 if __name__ == "__main__":
     # Pick json file with desired GPS coordinates
     launch_state = rospy.get_param('/load_waypoints_server/launch_state')
+    launch_state = "IGVC"
     if launch_state == "sim":
         static_waypoint_file = 'static_waypoints_pavement.json'
     else:
