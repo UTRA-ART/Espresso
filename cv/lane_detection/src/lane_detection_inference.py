@@ -75,7 +75,7 @@ class CVModelInferencer:
         self.frame_skip = 5
 
         # # Sets node rate to 5 Hz
-        # self.rate = rospy.Rate(9)
+        self.rate = rospy.Rate(9)
         
     def run(self):
         # Ensures only latest frame is processed, mitigates lag
