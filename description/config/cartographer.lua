@@ -65,7 +65,7 @@ options = {
   pose_publish_period_sec = 5e-3,
   trajectory_publish_period_sec = 30e-3,
   rangefinder_sampling_ratio = 1.,
-  odometry_sampling_ratio = 0.5,
+  odometry_sampling_ratio = 1.0,
   fixed_frame_pose_sampling_ratio = 1.,
   imu_sampling_ratio = 1.,
   landmarks_sampling_ratio = 1.,
@@ -73,13 +73,13 @@ options = {
 
 MAP_BUILDER.use_trajectory_builder_2d = true
 
-TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 10
+TRAJECTORY_BUILDER_2D.num_accumulated_range_data = 1
 
 TRAJECTORY_BUILDER_2D.min_range = 0.1
 TRAJECTORY_BUILDER_2D.missing_data_ray_length = 15.
 TRAJECTORY_BUILDER_2D.use_imu_data = false
-TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 10
-TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 15
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.translation_weight = 0
+TRAJECTORY_BUILDER_2D.ceres_scan_matcher.rotation_weight = 0
 
 POSE_GRAPH.constraint_builder.fast_correlative_scan_matcher.angular_search_window = math.rad(15.)
 POSE_GRAPH.constraint_builder.fast_correlative_scan_matcher.linear_search_window = 3.

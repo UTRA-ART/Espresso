@@ -75,7 +75,7 @@ class CVModelInferencer:
         self.frame_skip = 5
 
         # # Sets node rate to 5 Hz
-        self.rate = rospy.Rate(9)
+        # self.rate = rospy.Rate(9)
         
     def run(self):
         # Ensures only latest frame is processed, mitigates lag
@@ -105,10 +105,10 @@ class CVModelInferencer:
         if data == []:
             return
         # Frame skipping logic
-        self.frame_count += 1
-        if self.frame_count % self.frame_skip != 0:
-            return
-        self.frame_count = 0
+        # self.frame_count += 1
+        # if self.frame_count % self.frame_skip != 0:
+        #     return
+        # self.frame_count = 0
             
         raw = self.bridge.imgmsg_to_cv2(data, desired_encoding='passthrough')
         projected_lanes = np.load(self.depth_map_path)
