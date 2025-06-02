@@ -41,7 +41,7 @@ local_costmap:
       obstacle_range: 3.7,   # Decide how far we should see obstacles, should be less than raytrace range
       raytrace_range: 4,      # max lidar is rated for is 4m
       inf_is_valid: true,
-      expected_update_rate: 20
+      expected_update_rate: 10  # Changed from 20 to match LIDAR rate
     }
 
     # point_cloud_sensor: {
