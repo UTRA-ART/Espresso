@@ -211,10 +211,10 @@ private:
 
         // If lidar senses all inf, set one point to 3.0 for ~50 msgs to make cartographer initialize
         if (all_inf) { // if all inf, carto seems to not like it!
-            std::fill(out.begin(), out.end(), NAN);
+            std::fill(out.begin(), out.end(), inf);
 
             if (init_lidar_fill < 50) {
-                out[0] = 3.0;
+                out[init_lidar_fill] = 3.0;
                 init_lidar_fill += 1;
             }
         }
