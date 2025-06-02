@@ -4,8 +4,8 @@ delay: 20.0 # Real GPS start-up time
 # world_frame: map
 
 # Initial configuration
-# magnetic_declination_radians: -0.1306 # toronto?
-magnetic_declination_radians: -0.1302 # Detroit
+magnetic_declination_radians: -0.1306 # toronto?
+#magnetic_declination_radians: -0.1302 # Detroit
 yaw_offset: 3.1416  # pi rad since 0 yaw == West
 zero_altitude: true
 

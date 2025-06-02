@@ -7,7 +7,7 @@
         {
             "id" : 0,
             "longitude" : -83.218433,
-            "latitude" : 42.668212,
+            "latitude" : 42.66796,
             "description"  : "South waypoint",
             "frame_id" : "map"
         },
@@ -21,8 +21,8 @@
         {
             "id" : 2,
             "longitude" : -83.218433,
-            "latitude" : 42.66796,
-            "description"  : "North waypoint",
+            "latitude" : 42.668212,
+            "description"  : "South waypoint",
             "frame_id" : "map"
         }
         
