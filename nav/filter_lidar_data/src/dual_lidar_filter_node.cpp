@@ -203,7 +203,7 @@ private:
             }
 
             if (limit_output_range && (i < begin_idx || i > end_idx)) {
-                out[i] = NAN; // Remove ranges specified by desired output range
+                out[i] = inf; // Remove ranges specified by desired output range
             } else if (!std::isinf(out[i])) {
                 all_inf = false; // Only count inf if it's not part of ignored range
             }
