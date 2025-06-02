@@ -21,28 +21,28 @@ NavfnROS: #http://wiki.ros.org/navfn
 
 ##### Local Planner #####
 
-TebLocalPlannerROS:
-  acc_lim_x: 10
-  acc_lim_theta: 10
+# TebLocalPlannerROS:
+#   acc_lim_x: 10
+#   acc_lim_theta: 10
 
-  max_vel_x: 2.23
-  max_vel_x_backwards: 2.23
-  max_vel_theta: 5.0
+#   max_vel_x: 2.23
+#   max_vel_x_backwards: 2.23
+#   max_vel_theta: 5.0
 
-  acc_lim_y: 0
+#   acc_lim_y: 0
 
-  footprint_model/type: "polygon"
+#   footprint_model/type: "polygon"
 
-  #Goal Tolerance Parameters
-  xy_goal_tolerance: 0.75
-  yaw_goal_tolerance: 3.14
+#   #Goal Tolerance Parameters
+#   xy_goal_tolerance: 0.75
+#   yaw_goal_tolerance: 3.14
 
-  #Trajectory Parameters Configuration
-  min_samples: 20
+#   #Trajectory Parameters Configuration
+#   min_samples: 20
 
-  #global_plan_viapoint_sep
-  odom_topic: odom
-  map_frame: map
+#   #global_plan_viapoint_sep
+#   odom_topic: odom
+#   map_frame: map
 
 # Plans robot movement
 DWAPlannerROS: 
@@ -61,8 +61,8 @@ DWAPlannerROS:
   max_vel_y: 0
   min_vel_y: 0
 
-  max_vel_theta: 10.0
-  min_vel_theta: -10.0
+  max_vel_theta: 3
+  min_vel_theta: -3
 
   # Goal Tolerance Parameters
   yaw_goal_tolerance: 3.14
@@ -71,8 +71,8 @@ DWAPlannerROS:
   # Forward Simulation Parameters
   sim_time: 2.25
 
-  vx_samples: 40
-  vth samples: 40
+  vx_samples: 10
+  vth samples: 10
 
   #sim_granularity: 0.02
 
@@ -81,7 +81,9 @@ DWAPlannerROS:
   goal_distance_bias: 25.0
   occdist_scale: 0.1
 
-  scaling_speed: 0.75
+  min_speed_scale: 0.2
+  prefer_high_velocities: true
+  forward_point_distance: 0.3
 
 
 # Plans robot movement

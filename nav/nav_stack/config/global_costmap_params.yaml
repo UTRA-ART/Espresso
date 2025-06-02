@@ -62,7 +62,7 @@ global_costmap:
   inflation_layer:
     enabled:              true
     inflation_radius:     0.3 # Tunable parameter (affect navigation plan)
-    cost_scaling_factor: 1.5
+    cost_scaling_factor: 1
 
       # plugins:
       # - {name: static_layer,       type: "rtabmap_costmap_plugins::StaticLayer"}
